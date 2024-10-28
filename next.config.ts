@@ -1,5 +1,5 @@
 import type { NextConfig } from "next";
-
+import './envConfig.ts'
 const nextConfig: NextConfig = {
     output: "standalone",
     env:{
