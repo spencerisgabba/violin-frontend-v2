@@ -21,6 +21,7 @@ const fetcher = (url: string) => fetch(url).then((res) => {
     if (!res.ok) {
         throw new Error('Network response was not ok');
     }
+    console.log("API Base URL:", process.env.NEXT_PUBLIC_API_BASE_URL);
     return res.json();
 });
 
