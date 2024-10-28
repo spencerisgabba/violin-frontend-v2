@@ -32,7 +32,7 @@ export default function RootLayout({
       <NavBar/>
 
       {children}
-      <GoogleAnalytics gaId="G-88KZDVJEQL" />
+      <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_ANALYTICS_ID}`} />
       </body>
     </html>
   );
