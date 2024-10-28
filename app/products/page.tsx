@@ -25,7 +25,9 @@ const fetcher = (url: string) => fetch(url).then((res) => {
 });
 
 export default function Page() {
-    const { data, error } = useSWR<Violin[]>(`${process.env.NEXT_PUBLIC_API_BASE_URL}/product`, fetcher);
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
+    const fullPath = `${baseUrl}/product`;
+    const { data, error } = useSWR<Violin[]>(fullPath, fetcher);
     const [violins, setViolins] = useState<Violin[]>([]);
     const [sortOption, setSortOption] = useState<"priceLowToHigh" | "priceHighToLow">("priceLowToHigh");
     const [category, setCategory] = useState<string>("All");
