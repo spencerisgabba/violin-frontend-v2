@@ -1,0 +1,18 @@
+.zoom_image {
+  overflow: hidden;
+  max-width: 620px;
+  margin: 0 auto;
+  pointer-events: all;
+  cursor: zoom-in;
+
+  &.zoom_mode_active {
+    cursor: zoom-out;
+  }
+
+  img {
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+    transition: transform 200ms ease-out;
+  }
+}

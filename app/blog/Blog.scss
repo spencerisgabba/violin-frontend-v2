@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+@import "../global";
+
+.blogImg {
+  position: relative;
+  z-index: 0;
+  
+  margin-top: -50em;
+  @include xs {
+    height: 100%;
+    margin-top: -8em;
+  }
+  @include md {
+    height: 100%;
+    margin-top: -20em;
+  }
+  @include xl {
+    margin-top: -40em;
+  }
+}
+
+.title {
+  z-index: 1;
+  color: white;
+  font-size: 5em;
+  margin-top: 4em;
+  margin-bottom: 1em;
+  font-family: "Inknut Antiqua", serif;
+  font-weight: 700;
+  font-style: normal;
+
+}
+
+.article {
+
+  background-position: center;
+  background-size: cover;
+  box-shadow: inset 0 0 2em 1px #000;
+  transition: all .25s ease-in-out;
+  @include xs {
+    margin-top: 3em;
+    width: 15em;
+  }
+  @include md {
+    width: 18em;
+  }
+
+  &:hover {
+    margin-top: 2em;
+    box-shadow: inset 0 0 1em 1px #000;
+
+
+  }
+}
+
+.blogs {
+  width: 90vw;
+  margin-left: 5em;
+  margin-right: 5em;
+  margin-top: -15em;
+  justify-items: center;
+  @include xs {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+  }
+  @include xl {
+    padding: 6em;
+    display: grid;
+
+  }
+
+}
+
+.fbi {
+  position: relative;
+  z-index: 100;
+  margin-top: 10em;
+  @include xs {
+    width: 10em;
+    margin-top: 11em;
+    margin-left: 1em;
+  }
+  @include sm {
+    margin-top: 8em;
+    width: 15em;
+  }
+  @include md {
+    margin-top: 5em;
+    width: 20em;
+  }
+  @include xl {
+    margin-left: 5em;
+    margin-top: -2em;
+    width: 30em;
+  }
+
+}
