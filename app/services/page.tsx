@@ -1,11 +1,10 @@
 "use client"
 import React from 'react';
 import "./Services.scss";
-import "@/app/components/Carousel/carouselStyle.module.scss"
 const Page = () => {
     return (
         <div>
-            {/*<Carousel />*/}
+
             <div className="flex flex-col servList">
                 <div>
                     <h1>Repair</h1>
