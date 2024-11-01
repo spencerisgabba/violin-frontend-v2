@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import useSWR from "swr";
 import Link from "next/link";
@@ -6,6 +6,8 @@ import Image from "next/image";
 
 import "./home.scss";
 import {useEffect, useState} from "react";
+import Skeleton from "@/app/components/Skeleton/Skeleton";
+import VideoComponent from "@/app/components/VideoComponent";
 
 type BlogFeature = {
   id: string;
@@ -23,7 +25,7 @@ const fetcher = (url: string) =>
       return res.json();
     });
 
-const Home = () => {
+export default function Page() {
     const [feature, setFeature] = useState<BlogFeature[]>([]);
     const { data, error } = useSWR<BlogFeature[]>(`${process.env.NEXT_PUBLIC_API_BASE_URL}/blog/feature/featured`, fetcher);
 
@@ -34,15 +36,21 @@ const Home = () => {
     }, [data]);
 
     if (error) return <div>Error loading blog details.</div>;
-    if (!feature.length) return <div>Loading...</div>;
+    if (!feature.length) {
+    return (
+        <div className="main">
+            <Skeleton width="100%" height="20%" />
+        </div>
+    );
+}
 
     return (
       <div className="main">
 
         <div className="home">
-          <video width="750" height="500" autoPlay loop muted className="homeimg">
-            <source src={"/videos/train.webm"} type={"video/webm"} />
-          </video>
+            <div className="homeimg">
+            <VideoComponent />
+            </div>
           <div className="text">
             <h1>Violins für Alles</h1>
           </div>
@@ -103,4 +111,3 @@ const Home = () => {
   );
 };
 
-export default Home;

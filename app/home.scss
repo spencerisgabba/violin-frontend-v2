@@ -11,7 +11,18 @@
 
 
 }
+.video-container {
+  position: relative;
+  width: 150vw;
+  height: auto;
+  overflow: hidden;
+}
 
+.video-element {
+  width: auto;
+  height: auto;
+  object-fit: cover;
+}
 .home {
   position: relative;
 
