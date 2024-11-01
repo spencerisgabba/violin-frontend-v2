@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-const VideoComponent = () => {
+export default function Dw() {
+    const [isClient, setIsClient] = useState(false);
+
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
+
     return (
-        <div className="video-container">
-            <video className="video-element" autoPlay loop muted>
-                <source src="/train.mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-            </video>
+        <div>
+            {isClient &&
+                <video autoPlay loop >
+                    <source src="/train.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            }
         </div>
     );
-};
-
-export default VideoComponent;
+}
