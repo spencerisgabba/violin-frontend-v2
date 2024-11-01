@@ -7,7 +7,6 @@ import Image from "next/image";
 import "./home.scss";
 import {useEffect, useState} from "react";
 import Skeleton from "@/app/components/Skeleton/Skeleton";
-import VideoComponent from "@/app/components/VideoComponent";
 
 type BlogFeature = {
   id: string;
@@ -49,7 +48,11 @@ export default function Page() {
 
         <div className="home">
             <div className="homeimg">
-            <VideoComponent />
+                <video   preload="auto" controls={false} playsInline={true} autoPlay={true} muted={true} loop={true}>
+                    <source src="https://res.cloudinary.com/dztnyrx5z/video/upload/f_auto:video,q_auto/v1/videos/train" type="video/webm" />
+
+                    Your browser does not support the video tag.
+                </video>
             </div>
           <div className="text">
             <h1>Violins für Alles</h1>
