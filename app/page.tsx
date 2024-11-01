@@ -41,7 +41,7 @@ const Home = () => {
 
         <div className="home">
           <video width="750" height="500" autoPlay loop className="homeimg">
-            <source src={"/videos/train.webm"} type={"video/mp4"} />
+            <source src={"/videos/train.webm"} type={"video/webm"} />
           </video>
           <div className="text">
             <h1>Violins für Alles</h1>
