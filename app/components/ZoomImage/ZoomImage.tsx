@@ -37,9 +37,9 @@ const ZoomImage: React.FC<ZoomImageProps> = ({ src, alt }) => {
             >
                 <Image
                     loading="lazy"
-                    width={50}
+                    width={400}
                     src={src}
-                    height={50}
+                    height={650}
                     alt={alt}
                     style={{
                         transform: isActiveMode ? (window.innerWidth > 767 ? 'scale(2)' : 'scale(5)') : 'scale(1)',

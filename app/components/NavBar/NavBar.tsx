@@ -30,7 +30,7 @@ const NavBar = () => {
     return (
         <div className="z-10 flex items-center justify-between flex-wrap p-2 pl-8 sticky pb-3" style={{ backgroundColor }}>
             <div className="flex items-center flex-shrink-0 text-white mr-6 mt-4">
-                <Image width={100} height={100} className={"Logo"} src={"/Logo.svg"} alt={"Logo"}/>
+                <Image priority={true} width={100} height={100} className={"Logo"} src={"/Logo.svg"} alt={"Logo"}/>
                 <div>
                     <p className="font-serif text-lg tracking-tight w-20 h-14 -mt-6">Violin Guild of America</p>
                 </div>

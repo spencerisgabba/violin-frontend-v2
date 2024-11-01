@@ -47,12 +47,12 @@ const Page = () => {
     return (
         <div>
             <Link href={'/products'} className={'inline-block w-10 h-10 m-7'}>
-                <div>
+                <div >
                 <Image width={50} height={50} src={"/icons/returnIcon.svg"} alt={"back arrow"} />
                 </div>
             </Link>
             <div className='p-10 sm:grid sm:grid-cols-2 place-content-stretch h-auto flex flex-col'>
-                <div className='flex justify-end zoom-container relative'>
+                <div className='flex justify-end zoom-container relative' >
                     <ZoomImage src={violin.image || "/images/blurredImage.webp"} alt="Zoomable Image" />
                 </div>
                 <div className='ml-10 mt-10'>

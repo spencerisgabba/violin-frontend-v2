@@ -2,21 +2,23 @@
 @import "../global";
 
 .blogImg {
-  position: relative;
-  z-index: 0;
-  
-  margin-top: -50em;
-  @include xs {
-    height: 100%;
-    margin-top: -8em;
-  }
-  @include md {
-    height: 100%;
-    margin-top: -20em;
-  }
-  @include xl {
-    margin-top: -40em;
-  }
+  overflow: hidden;
+
+  //@include xs {
+  //  //height: 100%;
+  //  margin-top: -8em;
+  //}
+  //@include md {
+  //  //height: 100%;
+  //  margin-top: -20em;
+  //}
+  //@include xl {
+  //  margin-top: -40em;
+  //}
+}
+.topbar{
+
+
 }
 
 .title {
@@ -38,11 +40,16 @@
   box-shadow: inset 0 0 2em 1px #000;
   transition: all .25s ease-in-out;
   @include xs {
-    margin-top: 3em;
+    margin-top: 15em;
     width: 15em;
   }
   @include md {
-    width: 18em;
+    height: 25vw;
+    width: 20vw;
+  }
+  @include xl{
+    margin-top: 3vw;
+
   }
 
   &:hover {
@@ -54,21 +61,30 @@
 }
 
 .blogs {
+
   width: 90vw;
   margin-left: 5em;
   margin-right: 5em;
-  margin-top: -15em;
   justify-items: center;
   @include xs {
     padding: 0;
     display: flex;
+    margin-top: 30vw;
     justify-content: center;
     align-content: center;
     flex-wrap: wrap;
   }
   @include xl {
     padding: 6em;
+    width: 100vw;
+    margin-top: 10vw;
     display: grid;
+    gap: 10em;
+
+  }
+  @include md {
+    margin-top: 15vw;
+
 
   }
 
@@ -77,24 +93,26 @@
 .fbi {
   position: relative;
   z-index: 100;
-  margin-top: 10em;
+  top: 20em;
+  right: 25vw;
   @include xs {
-    width: 10em;
-    margin-top: 11em;
-    margin-left: 1em;
+    width: 70vw;
+    margin-top: 5em;
+    margin-left: 8em;
   }
   @include sm {
-    margin-top: 8em;
-    width: 15em;
+    margin-top: 4em;
   }
   @include md {
-    margin-top: 5em;
+    margin-top: 4em;
+    top: 30vw;
     width: 20em;
   }
   @include xl {
     margin-left: 5em;
-    margin-top: -2em;
-    width: 30em;
+    top: 15vw;
+
+    width: 35vw;
   }
 
 }

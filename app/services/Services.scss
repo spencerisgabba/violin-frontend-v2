@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+.servList{
+  overflow: hidden;
+
+  background-color: #2e4057;
+  padding: 5vw;
+  .backgroundImage {
+    background-image: url("../services/duotoneRepair.jpg");
+    background-size: cover;
+
+    width: 100vw;
+    height: 100vw;
+
+  }
+  h1{
+    font-size: 10vw;
+    z-index: 3;
+    text-align: right;
+    color: white;
+    font-family: "Inknut Antiqua", serif;
+  }
+  p{
+    z-index: 0;
+   padding: 1em;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-radius: 3px;
+    font-size: .8em;
+    position: relative;
+    top: -90vw;
+    color: white;
+  }
+  .servContainer {
+    margin-top: -50vw;
+
+    .backgroundImage2 {
+      background-image: url("duotoneReplace.jpg");
+      background-size: cover;
+      margin-top: -6vw;
+      width: 100vw;
+      height: 100vw;
+
+    }
+    h1{
+      text-align: left;
+    }
+  }
+
+
+}
+
+
+

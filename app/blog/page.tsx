@@ -41,17 +41,22 @@ export default function BlogPage() {
     return (
         <div className="bg-yellow-200 pb-8 flex flex-col justify-center items-center w-full">
             <div className={"topbar"}>
-                <Image src={"/images/blog_background.png"} alt="Blog Background" width={100} height={100} className="rounded-3xl blogImg" />
-                <Image src={"/icons/FiddleBow.svg"} alt="Fiddle and Bow Icon"  width={100} height={100} className="z-30 w-96 bottom-64 ml-10 fbi" />
-            </div>
+                <div className={"blogImg"}>
+                <Image  fill={true} src="/images/blog_background.webp" alt="Blog Background" objectFit="cover" className="rounded-3xl -mt-56" />
+                </div>
+                <div className={"fbi z-30 w-96 bottom-64"}>
+                    <Image width={400} height={400} src={"/icons/FiddleBow.svg"} alt="Fiddle and Bow Icon"
+                           />
+                </div>
+                </div>
 
-            <div className="grid gap-0 grid-cols-3 lg:px-80 bg-yellow-200 blogs">
+                <div className="grid xl:gap-56 grid-cols-3  bg-yellow-200 blogs">
                 {blogs
                     .filter((blog) => blog.status === 'published')
                     .map((blog) => (
                         <article
                             key={blog.id}
-                            className="article p-6 bg-white rounded-lg w-full h-96 shadow-2xl dark:bg-gray-800 dark:border-gray-700"
+                            className="article p-6 mx-3 bg-white rounded-lg w-full h-96 shadow-2xl dark:bg-gray-800 dark:border-gray-700"
                             style={{ backgroundImage: `url(${blog.image_url})` }}
                         >
                             <Link href={`/blog/${blog.slug}`}>

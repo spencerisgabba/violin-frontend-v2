@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import useSWR from "swr";
 import Link from "next/link";
-import "./Products.scss";
 import Image from "next/image";
+import "../services/Products.scss";
 
 type Violin = {
     id: string;
@@ -17,32 +17,23 @@ type Violin = {
     createdAt: string;
 };
 
-const fetcher = (url: string) => fetch(url).then((res) => {
-    if (!res.ok) {
-        throw new Error('Network response was not ok');
-    }
-    return res.json();
-});
+const fetcher = (url: string) =>
+    fetch(url).then((res) => {
+        if (!res.ok) {
+            throw new Error("Network response was not ok");
+        }
+        return res.json();
+    });
 
 export default function Page() {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
-    const fullPath = `${baseUrl}/product`;
-    const { data, error } = useSWR<Violin[]>(fullPath, fetcher);
     const [violins, setViolins] = useState<Violin[]>([]);
+    const [filteredViolins, setFilteredViolins] = useState<Violin[]>([]);
+    const { data, error } = useSWR<Violin[]>(`${process.env.NEXT_PUBLIC_API_BASE_URL}/product`, fetcher);
     const [sortOption, setSortOption] = useState<"priceLowToHigh" | "priceHighToLow">("priceLowToHigh");
     const [category, setCategory] = useState<string>("All");
-    const [filteredViolins, setFilteredViolins] = useState<Violin[]>([]);
     const categories = ["All", "Violin", "Cello", "Bass"];
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
-
-    useEffect(() => {
-        if (data) {
-            setViolins(data);
-            setFilteredViolins(data);
-        }
-    }, [data]);
-
     useEffect(() => {
         let filtered = violins;
 
@@ -58,9 +49,16 @@ export default function Page() {
 
         setFilteredViolins(filtered);
     }, [category, sortOption, violins]);
-
+    useEffect(() => {
+        if (data) {
+            setViolins(data);
+            setFilteredViolins(data);
+        }
+    }, [data]);
     if (error) return <div>Failed to load data</div>;
     if (!data) return <div>Loading...</div>;
+
+
 
     const handleSortChange = (option: "priceLowToHigh" | "priceHighToLow") => {
         setSortOption(option);
@@ -71,6 +69,7 @@ export default function Page() {
         setCategory(selectedCategory);
         setDropdownOpen(false);
     };
+
 
     return (
         <div className="flex flex-col h-screen products -mt-16">
@@ -152,8 +151,8 @@ export default function Page() {
                                 {filteredViolins.map((violin) => (
                                     <Link key={violin.id} href={`/products/${violin.title}`} className="product">
                                         <motion.div transition={{ duration: 0.3 }} animate={{ opacity: 1, y: -10 }} initial={{ opacity: 0, y: 10 }} exit={{ opacity: 0 }} className="flex flex-col max-w-68 p-3 md:p-10">
-                                            <Image width={200} quality={50} height={350} className="rounded-lg h-60 w-44" src={violin.image || "/images/blurredImage.webp"} alt="Product" />
-                                            <h2 className="text-xl text-white">{violin.title}</h2>
+                                            <Image width={200} quality={50} height={350} src={violin.image || "/images/blurredImage.webp"} alt="Product" className="rounded-lg h-60 w-44"/>
+                                                <h2 className="text-xl text-white">{violin.title}</h2>
                                             <p className="text-lg text-gray-400">${violin.price}</p>
                                         </motion.div>
                                     </Link>
