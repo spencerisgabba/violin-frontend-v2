@@ -1,9 +1,9 @@
-@import "../global";
+@use '../global' as *;
 
 .products {
   background-color: #2e4057;
   padding-top: 15em;
-  background-image: url("../products/placeholder.jpg");
+  background-image: url("placeholder.jpg");
   background-size: cover;
 
 

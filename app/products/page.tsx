@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import useSWR from "swr";
 import Link from "next/link";
 import Image from "next/image";
-import "../services/Products.scss";
+import "./Products.scss";
 
 type Violin = {
     id: string;
