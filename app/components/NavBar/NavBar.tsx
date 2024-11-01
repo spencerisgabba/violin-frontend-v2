@@ -1,7 +1,8 @@
+// app/components/NavBar/NavBar.tsx
 
 "use client"
 import { useEffect, useState } from "react";
-import Link from "next/link"; // Correct import
+import Link from "next/link";
 import { usePathname } from 'next/navigation';
 import "./nav.scss";
 import Hamburger from 'hamburger-react';
@@ -9,9 +10,9 @@ import Image from "next/image";
 
 const NavBar = () => {
     const [isOpen, setOpen] = useState(false);
-    const pathname = usePathname(); // Get the router object
+    const pathname = usePathname();
     const [backgroundColor, setBackgroundColor] = useState('transparent');
-
+    const imageWH = 80;
     useEffect(() => {
         switch (true) {
             case pathname.startsWith('/violin/'):
@@ -25,12 +26,12 @@ const NavBar = () => {
             default:
                 setBackgroundColor('transparent');
         }
-    }, [pathname]); // Listen to pathname changes
+    }, [pathname]);
 
     return (
-        <div className="z-10 flex items-center justify-between flex-wrap p-2 pl-8 sticky pb-3" style={{ backgroundColor }}>
-            <div className="flex items-center flex-shrink-0 text-white mr-6 mt-4">
-                <Image priority={true} width={100} height={100} className={"Logo"} src={"/Logo.svg"} alt={"Logo"}/>
+        <div className={`z-10 flex items-center justify-between flex-wrap p-2 pl-8 sticky pb-3 ${pathname === '/' ? 'drop-shadow' : ''}`} style={{ backgroundColor }}>
+            <div className="flex items-center flex-shrink-0 text-white mr-6 mt-2">
+                <Image priority={true} width={imageWH} height={imageWH} className={"Logo"} src={"/Logo.svg"} alt={"Logo"}/>
                 <div>
                     <p className="font-serif text-lg tracking-tight w-20 h-14 -mt-6">Violin Guild of America</p>
                 </div>

@@ -4,11 +4,11 @@
 
 .homeimg {
   z-index: 0;
-
-  width: 150vw;
+  width: 100vw;
+  border-radius: 5em;
   position: relative;
-  top: -10em;
-
+  top: -12em;
+  overflow: hidden;
 
 }
 .video-container {
@@ -34,7 +34,7 @@
     color: white;
     text-align: center;
     z-index: 2;
-    font-size: 10vw;
+    font-size: 9vw;
     top: -5em;
     position: relative;
 

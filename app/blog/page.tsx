@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from "next/image"
 import "./Blog.scss";
 import useSWR from 'swr';
+import Head from "next/head";
 
 interface BlogPost {
     id: string;
@@ -40,7 +41,10 @@ export default function BlogPage() {
 
     return (
         <div className="bg-yellow-200 pb-8 flex flex-col justify-center items-center w-full">
-            <div className={"topbar"}>
+            <Head>
+                <title>Blog</title>
+            </Head>
+            <div className={"topbar "}>
                 <div className={"blogImg"}>
                 <Image  fill={true} src="/images/blog_background.webp" alt="Blog Background" objectFit="cover" className="rounded-3xl -mt-56" />
                 </div>

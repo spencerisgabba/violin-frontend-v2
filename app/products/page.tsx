@@ -72,8 +72,8 @@ export default function Page() {
 
 
     return (
-        <div className="flex flex-col h-screen products -mt-16">
-            <div className="bg-amber-500 sm:mx-10 glass">
+        <div className="flex flex-col h-screen products ">
+            <div className="bg-amber-500 sm:mx-10 glass ">
                 <div className="flex flex-row flex-wrap mt-3 topbar p-3">
                     <div className="mb-4 mr-4 flex">
                         <label htmlFor="sortOptions" className="font-medium text-gray-900">Sort by: </label>
@@ -113,7 +113,7 @@ export default function Page() {
                                 className="text-white bg-gray-400 hover:bg-gray-800 focus:ring-2 focus:outline-none font-medium rounded-lg text-sm px-2 py-1 inline-flex items-center"
                             >
                                 {category || "Select Category"}
-                                <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" viewBox="0 0 10 6">
+                                <svg className="w-2.5 h-2.5 ms-2.5" aria-hidden="true" viewBox="0 0 10 6" >
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 4 4 4-4" />
                                 </svg>
                             </button>
