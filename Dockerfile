@@ -48,7 +48,7 @@ USER nextjs
 # Expose port and set environment variables
 EXPOSE 3000
 ENV PORT=3000
-ENV NEXT_PUBLIC_API_BASE_URL="https://nestbackendviolin-306962033564.us-central1.run.app"
+ENV NEXT_PUBLIC_API_BASE_URL="https://nestbackendviolin-306962033564.us-central1.run.app/"
 ENV NEXT_PUBLIC_ANALYTICS_ID=${NEXT_PUBLIC_ANALYTICS_ID}
 ENV HOSTNAME="0.0.0.0"
 
