@@ -40,7 +40,7 @@ const Home = () => {
       <div className="main">
 
         <div className="home">
-          <video width="750" height="500" autoPlay loop className="homeimg">
+          <video width="750" height="500" autoPlay loop muted className="homeimg">
             <source src={"/videos/train.webm"} type={"video/webm"} />
           </video>
           <div className="text">
