@@ -10,8 +10,8 @@ export default function Dw() {
     return (
         <div>
             {isClient &&
-                <video autoPlay loop >
-                    <source src="/train.mp4" type="video/mp4" />
+                <video autoPlay loop playsInline={true} muted={true} crossOrigin={"anonymous"}>
+                    <source src="/videos/train.webm" type="video/webm" />
                     Your browser does not support the video tag.
                 </video>
             }
