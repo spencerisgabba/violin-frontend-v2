@@ -1,8 +1,13 @@
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./global.scss";
 import NavBar from "@/app/components/NavBar/NavBar";
 import { GoogleAnalytics } from '@next/third-parties/google'
+
+
+
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",

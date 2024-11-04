@@ -17,6 +17,7 @@ type BlogFeature = {
     slug: string;
 };
 
+
 const fetcher = (url: string) =>
     fetch(url).then((res) => {
         if (!res.ok) {
@@ -87,6 +88,7 @@ export default function Page() {
         <div className="main" id="smooth-wrapper">
             <Head>
                 <title>Violin Guild of America</title>
+
             </Head>
             <div className="home" id="smooth-content">
                 <div className="homeimg">

@@ -15,6 +15,8 @@ type Violin = {
     category: string;
     description: string;
     createdAt: string;
+    imageBack: string;
+
 };
 
 const fetcher = (url: string) =>
@@ -154,6 +156,7 @@ export default function Page() {
                                             <Image width={200} quality={50} height={350} src={violin.image || "/images/blurredImage.webp"} alt="Product" className="rounded-lg h-60 w-44"/>
                                                 <h2 className="text-xl text-white">{violin.title}</h2>
                                             <p className="text-lg text-gray-400">${violin.price}</p>
+                                            <p>{violin.imageBack}</p>
                                         </motion.div>
                                     </Link>
                                 ))}
