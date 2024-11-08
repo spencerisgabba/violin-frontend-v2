@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion, stagger  } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import useSWR from "swr";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,14 +9,12 @@ import "./Products.scss";
 
 type Violin = {
     id: string;
-    image: string;
+    images: string; // Comma-separated image URLs
     title: string;
     price: number;
     category: string;
     description: string;
     createdAt: string;
-    imageBack: string;
-
 };
 
 const fetcher = (url: string) =>
@@ -36,6 +34,7 @@ export default function Page() {
     const categories = ["All", "Violin", "Cello", "Bass"];
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
+
     useEffect(() => {
         let filtered = violins;
 
@@ -51,16 +50,16 @@ export default function Page() {
 
         setFilteredViolins(filtered);
     }, [category, sortOption, violins]);
+
     useEffect(() => {
         if (data) {
             setViolins(data);
             setFilteredViolins(data);
         }
     }, [data]);
+
     if (error) return <div>Failed to load data</div>;
     if (!data) return <div>Loading...</div>;
-
-
 
     const handleSortChange = (option: "priceLowToHigh" | "priceHighToLow") => {
         setSortOption(option);
@@ -72,10 +71,9 @@ export default function Page() {
         setDropdownOpen(false);
     };
 
-
     return (
-        <div className="flex flex-col h-screen products ">
-            <div className="bg-amber-500 sm:mx-10 glass ">
+        <div className="flex flex-col h-screen products">
+            <div className="bg-amber-500 sm:mx-10 glass">
                 <div className="flex flex-row flex-wrap mt-3 topbar p-3">
                     <div className="mb-4 mr-4 flex">
                         <label htmlFor="sortOptions" className="font-medium text-gray-900">Sort by: </label>
@@ -145,18 +143,35 @@ export default function Page() {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                transition={{ duration: 0.2, staggerChildren:.5,  }}
+                                transition={{ duration: 0.5 }} // Adjust duration for smoother transition
                             >
-                                {filteredViolins.map((violin) => (
-                                    <Link key={violin.id} href={`/products/${violin.title}`} className="product">
-                                        <motion.div transition={{ duration: 0.3 }} animate={{ opacity: 1, y: -10,x:0, position:"relative" }} initial={{ opacity: 0, y: 10 }} exit={{ opacity: 0 }} className="flex flex-col max-w-68 p-3 md:p-10">
-                                            <Image width={200} quality={50} height={350} src={violin.image === "null" ? "/images/blurredImage.webp" : violin.image} alt="Product" className="rounded-lg h-60 w-44"/>
-                                            <h2 className="text-lg text-white p-0 m-0">{violin.title}</h2>
-                                            <p className="text-md text-gray-400">${violin.price}</p>
-
-                                        </motion.div>
-                                    </Link>
-                                ))}
+                                {filteredViolins.map((violin) => {
+                                    const imagesArray = violin.images.split(',').map(url => url.trim());
+                                    return (
+                                        <Link key={violin.id} href={`/products/${violin.title}`} className="product">
+                                            <motion.div
+                                                transition={{ duration: 0.3 }}
+                                                animate={{ opacity: 1, y: -10, x: 0, position: "relative" }}
+                                                initial={{ opacity: 0, y: 10 }}
+                                                exit={{ opacity: 0 }}
+                                                className="flex flex-col max-w-68 p-3 md:p-10"
+                                            >
+                                                <div className="image-container">
+                                                    <Image
+                                                        width={200}
+                                                        quality={50}
+                                                        onMouseOver={(e) => e.currentTarget.src = imagesArray[1] || "/images/blurredImage.webp"}
+                                                        height={350}
+                                                        src={imagesArray[0] || "/images/blurredImage.webp"}
+                                                        alt="Product"
+                                                        className="rounded-lg h-60 w-44"
+                                                    />
+                                                </div>
+                                                <p className="text-lg text-gray-400">${violin.price}</p>
+                                            </motion.div>
+                                        </Link>
+                                    );
+                                })}
                             </motion.div>
                         ) : (
                             <div>

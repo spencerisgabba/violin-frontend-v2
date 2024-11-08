@@ -2,11 +2,6 @@
 import React from 'react';
 import "./Services.scss";
 
-const items = [
-    { label: "Tab 1", color: "#FF5733" },
-    { label: "Tab 2", color: "#33FF57" },
-    { label: "Tab 3", color: "#3357FF" },
-  ];
 
 
 const Page = () => {

@@ -6,7 +6,6 @@ import Image from "next/image";
 import "./Blog.scss";
 import useSWR from 'swr';
 import Head from "next/head";
-import Carousel from "@/app/components/Carousel/Carousel.cotroller";
 interface BlogPost {
     id: string;
     slug: string;
@@ -14,8 +13,9 @@ interface BlogPost {
     subheading: string;
     image_url: string;
     status: string;
-    createdAt: any;
-    value: string;
+    createdAt: {
+        value: string;
+    };
 }
 
 const fetcher = (url: string) => fetch(url).then((res) => {

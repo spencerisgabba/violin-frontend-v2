@@ -8,7 +8,6 @@ import { useEffect, useState, useRef } from "react";
 import Skeleton from "@/app/components/Skeleton/Skeleton";
 import Head from "next/head";
 import { gsap } from "gsap";
-import TabbedComponent from "@/app/components/Carousel/TabbedComponent";
 type BlogFeature = {
     id: string;
     image_url: string;
@@ -17,11 +16,7 @@ type BlogFeature = {
     slug: string;
 };
 
-const features = [
-    { title: "Feature 1", content: "Content for feature 1", backgroundImage: "url-to-image-1.jpg" },
-    { title: "Feature 2", content: "Content for feature 2", backgroundImage: "url-to-image-2.jpg" },
-    { title: "Feature 3", content: "Content for feature 3", backgroundImage: "url-to-image-3.jpg" },
-  ];
+
 const fetcher = (url: string) =>
     fetch(url).then((res) => {
         if (!res.ok) {

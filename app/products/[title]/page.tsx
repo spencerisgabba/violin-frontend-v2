@@ -14,9 +14,10 @@ type Violin = {
     price: number;
     category: string;
     description: string;
-    createdAt: string | null;
-    value: string;
-    imageBack: string;
+    images:string;
+    createdAt: {
+        value:string;
+    }
 };
 
 const fetcher = (url: string) =>
@@ -42,9 +43,6 @@ export default function Page(): JSX.Element {
 
     if (error) return <div>Error loading violin details.</div>;
     if (!violin) return <div>Loading...</div>;
-
-    const mainSrc = violin.image === "null" ? "/images/blurredImage.webp" : violin.image;
-    const thumbnailSrc = violin.imageBack === "null" ? "/images/blurredImage.webp" : violin.imageBack;
 
     return (
         <div className={"bg-amber-50"}>
