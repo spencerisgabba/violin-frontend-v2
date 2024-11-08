@@ -8,7 +8,7 @@ import { useEffect, useState, useRef } from "react";
 import Skeleton from "@/app/components/Skeleton/Skeleton";
 import Head from "next/head";
 import { gsap } from "gsap";
-
+import TabbedComponent from "@/app/components/Carousel/TabbedComponent";
 type BlogFeature = {
     id: string;
     image_url: string;
@@ -17,7 +17,11 @@ type BlogFeature = {
     slug: string;
 };
 
-
+const features = [
+    { title: "Feature 1", content: "Content for feature 1", backgroundImage: "url-to-image-1.jpg" },
+    { title: "Feature 2", content: "Content for feature 2", backgroundImage: "url-to-image-2.jpg" },
+    { title: "Feature 3", content: "Content for feature 3", backgroundImage: "url-to-image-3.jpg" },
+  ];
 const fetcher = (url: string) =>
     fetch(url).then((res) => {
         if (!res.ok) {
@@ -104,18 +108,21 @@ export default function Page() {
 
             <div className="maincontent">
                 <h1 className="bully">Bulletin</h1>
+
                 <div className="bulletin">
                     {feature.length > 0 ? (
                         feature.map((item) => (
-                            <div key={item.id} className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 my-5 blog">
-                                <Image
-                                    className="img w-30 collapse md:visible"
-                                    src={item.image_url}
-                                    width={200}
-                                    height={200}
-                                    alt="Blog"
-                                />
-                                <div className="md:pl-16">
+                            <div key={item.id} className="max-w-sm p-3 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 my-5 blog">
+                                <div className="img  hidden lg:visible lg:block">
+                                    <Image
+                                        className="object-cover"
+                                        src={item.image_url}
+                                        fill
+
+                                        alt="Blog"
+                                    />
+                                </div>
+                                <div className="md:pl-4">
                                     <Link href={`/blog/${item.slug}`}>
                                         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                                             {item.title}
@@ -153,6 +160,7 @@ export default function Page() {
                     )}
                 </div>
             </div>
+
         </div>
     );
 }

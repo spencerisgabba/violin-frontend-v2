@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
                 hostname: 'images.pexels.com',
                 port: '',
             },
+            {
+                protocol: 'https',
+                hostname: 'res.cloudinary.com',
+                port: '',
+            },
         ],
     },
 };

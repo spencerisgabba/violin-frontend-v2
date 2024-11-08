@@ -22,3 +22,17 @@ a:hover {
 .drop-shadow {
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.03);
 }
+
+.nav-menu {
+  display: none; /* Hide by default */
+}
+
+.nav-menu.active {
+  display: block; /* Show when active */
+}
+
+@media (min-width: 1024px) {
+  .nav-menu {
+    display: flex; /* Always show on larger screens */
+  }
+}

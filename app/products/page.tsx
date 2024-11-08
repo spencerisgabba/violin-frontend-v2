@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, stagger  } from "framer-motion";
 import useSWR from "swr";
 import Link from "next/link";
 import Image from "next/image";
@@ -137,26 +137,23 @@ export default function Page() {
                 </div>
                 <hr />
                 <div className="flex flex-row flex-wrap">
-                    <AnimatePresence>
+                    <AnimatePresence mode="wait">
                         {filteredViolins.length > 0 ? (
                             <motion.div
+                                key={filteredViolins.length}
                                 className="flex flex-row flex-wrap productcontainers"
-                                initial="hidden"
-                                animate="visible"
-                                exit="exit"
-                                variants={{
-                                    hidden: { opacity: 0 },
-                                    visible: { opacity: 1, transition: { staggerChildren: 0.5 } },
-                                    exit: { opacity: 0 },
-                                }}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.2, staggerChildren:.5,  }}
                             >
                                 {filteredViolins.map((violin) => (
                                     <Link key={violin.id} href={`/products/${violin.title}`} className="product">
-                                        <motion.div transition={{ duration: 0.3 }} animate={{ opacity: 1, y: -10 }} initial={{ opacity: 0, y: 10 }} exit={{ opacity: 0 }} className="flex flex-col max-w-68 p-3 md:p-10">
-                                            <Image width={200} quality={50} height={350} src={violin.image || "/images/blurredImage.webp"} alt="Product" className="rounded-lg h-60 w-44"/>
-                                                <h2 className="text-xl text-white">{violin.title}</h2>
-                                            <p className="text-lg text-gray-400">${violin.price}</p>
-                                            <p>{violin.imageBack}</p>
+                                        <motion.div transition={{ duration: 0.3 }} animate={{ opacity: 1, y: -10,x:0, position:"relative" }} initial={{ opacity: 0, y: 10 }} exit={{ opacity: 0 }} className="flex flex-col max-w-68 p-3 md:p-10">
+                                            <Image width={200} quality={50} height={350} src={violin.image === "null" ? "/images/blurredImage.webp" : violin.image} alt="Product" className="rounded-lg h-60 w-44"/>
+                                            <h2 className="text-lg text-white p-0 m-0">{violin.title}</h2>
+                                            <p className="text-md text-gray-400">${violin.price}</p>
+
                                         </motion.div>
                                     </Link>
                                 ))}

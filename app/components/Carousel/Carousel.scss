@@ -1,0 +1,17 @@
+.carouselContainer {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+  height: 100%;
+}
+
+.carousel {
+  display: flex;
+  cursor: grab;
+}
+
+.carouselItem {
+  min-width: 100%;
+  background-size: contain;
+  background-position: center;
+}
