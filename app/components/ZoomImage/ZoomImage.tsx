@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 interface ZoomImageProps {
-    imageUrls: string; // Comma-separated URLs
+    imageUrls: string;
     alt: string;
 }
 
@@ -38,7 +38,7 @@ const ZoomImage: React.FC<ZoomImageProps> = ({ imageUrls, alt }) => {
         setTimeout(() => {
             setCurrentSrc(url);
             setIsBlurring(false);
-        }, 300); // Duration of the blur and brightness animation
+        }, 300); 
     };
 
     const defaultImage = "/images/blurredImage.webp";
@@ -46,29 +46,26 @@ const ZoomImage: React.FC<ZoomImageProps> = ({ imageUrls, alt }) => {
     return (
         <div>
             <div
-                className={`zoom_image ${isActiveMode ? 'zoom_mode_active' : ''}`}
+                className={`zoom_image ${isActiveMode ? 'zoom_mode_active' : ''} flex justify-center items-center`}
                 onClick={handleClick}
                 onMouseMove={handleMouseMove}
-                style={{ overflow: 'hidden', width: '400px', height: '650px' }} // Fixed dimensions
+                style={{width: '25rem', height: '40.625rem' }}
             >
                 <motion.div
                     animate={{ filter: isBlurring ? 'blur(20px) brightness(300%)' : 'blur(0px) brightness(100%)' }}
                     transition={{ duration: 0.3 }}
-                    style={{ width: '100%', height: '100%' }} // Ensure the motion div takes full space
+                    className={" w-11/12 sm:w-full h-full "}
                 >
                     <Image
-                        loading="lazy"
-                        width={400}
-                        height={650}
+                        fill
                         src={currentSrc || defaultImage}
                         quality={100}
                         draggable={false}
+                        priority={true}
+                        objectFit={"contain"}
                         alt={alt}
                         style={{
-                            width: '100%',
-                            height: '100%',
-                            objectFit: 'cover', // Ensures the image covers the container
-                            transform: isActiveMode ? (window.innerWidth > 767 ? 'scale(2)' : 'scale(5)') : 'scale(1)',
+                            transform: isActiveMode ? (window.innerWidth > 767 ? 'scale(3)' : 'scale(5)') : 'scale(1)',
                             transformOrigin: transformOrigin,
                             transition: 'transform 0.3s ease',
                         }}
@@ -91,7 +88,6 @@ const ZoomImage: React.FC<ZoomImageProps> = ({ imageUrls, alt }) => {
                             quality={100}
                             draggable={false}
                             alt={`Thumbnail of ${alt} ${index + 1}`}
-                            className={"h-36"}
                         />
                     </div>
                 ))}

@@ -1,10 +1,23 @@
+@use '../../global' as *;
+
 .zoom_image {
   overflow: hidden;
-  max-width: 620px;
   margin: 0 auto;
   pointer-events: all;
   cursor: zoom-in;
+  width: 90svw;
+  height: 90vh;
+  position: relative;
+  @include md {
+    width: 45vw;
+    height: 45vh;
 
+  }
+  @include lg {
+    width: 50vw;
+    height: 45vh;
+
+  }
   &.zoom_mode_active {
     cursor: zoom-out;
   }
@@ -16,3 +29,4 @@
     transition: transform 200ms ease-out;
   }
 }
+
