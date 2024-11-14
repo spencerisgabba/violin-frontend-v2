@@ -33,7 +33,7 @@ export default function Page() {
       setBows(data);
     }
   }, [data]);
-  console.log(data);
+  if (error) return <div>Error loading blog details.</div>;
 
   return (
     <div>
