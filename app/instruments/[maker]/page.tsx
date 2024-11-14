@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import useSWR from "swr";
 import Link from "next/link";
 import Image from "next/image";
-import "./Products.scss";
-import { useFuzzySearchList } from "@nozbe/microfuzz/react";
+import "../Products.scss";
+import { useParams } from "next/navigation";
 
 type Violin = {
   id: string;
@@ -31,10 +31,12 @@ const fetcher = (url: string) =>
   });
 
 export default function Page() {
+  const params = useParams<{ maker: string }>();
   const [violins, setViolins] = useState<Violin[]>([]);
+  const { maker } = params;
   const [filteredViolins, setFilteredViolins] = useState<Violin[]>([]);
   const { data, error } = useSWR<Violin[]>(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/product`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/${maker}`,
     fetcher,
   );
   const [sortOption, setSortOption] = useState<
@@ -44,32 +46,14 @@ export default function Page() {
   const categories = ["All", "Violin", "Viola", "Cello", "Bass"];
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [sortDropdownOpen, setSortDropdownOpen] = useState(false);
-  const makers = useRef(new Set<string>()).current;
-  // const [uniqueMakers, setUniqueMakers] = useState<string[]>([]);
-  // const [selectedMaker, setSelectedMaker] = useState<string>("");
-  const [queryText, setQueryText] = useState("");
-
-  const filteredList = useFuzzySearchList({
-    list: filteredViolins,
-    queryText,
-    getText: (item) => [
-      item.makerFirst,
-      item.makerLast,
-      item.makeYear,
-      item.category,
-    ],
-    mapResultItem: ({ item }) => item,
-  });
 
   useEffect(() => {
-    let filtered = filteredViolins;
+    let filtered = violins;
 
     if (category && category !== "All") {
       filtered = violins.filter(
         (violin) => violin.category.toLowerCase() === category.toLowerCase(),
       );
-    } else {
-      filtered = violins;
     }
 
     if (sortOption === "priceLowToHigh") {
@@ -85,12 +69,8 @@ export default function Page() {
     if (data) {
       setViolins(data);
       setFilteredViolins(data);
-      data.forEach((item) =>
-        makers.add(item.makerFirst + " " + item.makerLast),
-      );
-      // setUniqueMakers(Array.from(makers));
     }
-  }, [data, makers, filteredViolins]);
+  }, [data]);
 
   if (error) return <div>Failed to load data</div>;
   if (!data) return <div>Loading...</div>;
@@ -100,26 +80,6 @@ export default function Page() {
     setSortDropdownOpen(false);
   };
 
-  // const MakerDropdown = ({ makers }: { makers: string[] }) => {
-  //
-  //     const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
-  //         const selectedMaker = event.target.value;
-  //         if (selectedMaker) {
-  //             setSelectedMaker(selectedMaker);
-  //         }
-  //     };
-  //
-  //     return (
-  //         <select onChange={handleSelect} defaultValue="">
-  //             <option value="" disabled>Select a Maker</option>
-  //             {uniqueMakers.map((maker, index) => (
-  //                 <option key={index} value={maker}>
-  //                     <Link href={`/products/${maker}`}>{maker}</Link>
-  //                 </option>
-  //             ))}
-  //         </select>
-  //     );
-  // };
   const handleCategoryChange = (selectedCategory: string) => {
     setCategory(selectedCategory);
     setDropdownOpen(false);
@@ -129,37 +89,6 @@ export default function Page() {
     <div className="flex flex-col h-screen products">
       <div className="bg-amber-500 sm:mx-10 glass">
         <div className="flex flex-row flex-wrap mt-3 topbar p-3">
-          <form className="">
-            <div className="relative mx-6 drop-shadow">
-              <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg
-                  className="w-4 h-4 text-gray-200"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="white"
-                    stroke-linecap="round"
-                    fill={"white"}
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
-              </div>
-              <input
-                type="search"
-                id="default-search"
-                className="block w-full p-2 ps-10 text-sm text-gray-200   rounded-lg bg-gray-500  dark:placeholder-gray-400  "
-                placeholder="Search Products"
-                value={queryText}
-                onChange={(e) => setQueryText(e.target.value)}
-              />
-            </div>
-          </form>
-
           <div className="mb-4 mr-4 flex">
             <label htmlFor="sortOptions" className="font-medium text-gray-900">
               Sort by:{" "}
@@ -254,23 +183,23 @@ export default function Page() {
         <hr />
         <div className="flex flex-row flex-wrap">
           <AnimatePresence mode="wait">
-            {filteredList.length > 0 ? (
+            {filteredViolins.length > 0 ? (
               <motion.div
                 key={filteredViolins.length}
                 className="flex flex-row flex-wrap productcontainers"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.5 }} // Adjust duration for smoother transition
               >
-                {filteredList.map((violin) => {
+                {filteredViolins.map((violin) => {
                   const imagesArray = violin.images
                     .split(",")
                     .map((url) => url.trim());
                   return (
                     <Link
                       key={violin.id}
-                      href={`/products/${violin.makerLast}/${violin.makeYear}`}
+                      href={`/instruments/${violin.makerLast}/${violin.makeYear}`}
                       className="product"
                     >
                       <motion.div
@@ -289,15 +218,17 @@ export default function Page() {
                           <Image
                             width={150}
                             quality={50}
+                            onMouseOver={(e) =>
+                              (e.currentTarget.src =
+                                imagesArray[1] || "/images/blurredImage.webp")
+                            }
                             height={350}
                             src={imagesArray[0] || "/images/blurredImage.webp"}
                             alt="Product"
                             className="rounded-lg h-60 w-40"
                           />
                         </div>
-                        <h2 className={"text-white"}>
-                          {violin.makerFirst} {violin.makerLast}
-                        </h2>
+                        <h2 className={"text-white"}>{violin.maker}</h2>
                         <h4 className={"text-gray-500 m-0 p-0"}>
                           {violin.makeYear}
                         </h4>
