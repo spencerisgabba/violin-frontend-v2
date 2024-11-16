@@ -10,16 +10,21 @@ interface Bow {
   Price: number;
 }
 
-function Filter({ categories, onFilterChange }) {
+interface FilterProps {
+  categories: string[];
+  onFilterChange: (category: string) => void;
+}
+
+function Filter({ categories, onFilterChange }: FilterProps) {
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  const handleCategoryChange = (e) => {
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedCategory(e.target.value);
     onFilterChange(e.target.value);
   };
 
   // Map category codes to display names
-  const categoryNames = {
+  const categoryNames: { [key: string]: string } = {
     VA: "Viola",
     VC: "Cello",
     VN: "Violin",
@@ -102,7 +107,7 @@ export default function Page() {
   });
 
   const categories = ["VA", "VC", "VN"];
-  const handleFilterChange = (category) => {
+  const handleFilterChange = (category: string) => {
     if (category === "") {
       setFilteredBows(bows);
     } else {
