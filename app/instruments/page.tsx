@@ -23,7 +23,10 @@ type Violin = {
   makerFirst: string;
   makerLast: string;
 };
-
+const USDollar = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
 const fetcher = (url: string) =>
   fetch(url).then((res) => {
     if (!res.ok) {
@@ -303,7 +306,9 @@ export default function Page() {
                         <h4 className={"text-gray-500 m-0 p-0"}>
                           {violin.makeYear}
                         </h4>
-                        <p className="text-lg text-gray-400">${violin.price}</p>
+                        <p className="text-lg text-gray-400">
+                          {USDollar.format(violin.price)}
+                        </p>
                       </motion.div>
                     </Link>
                   );
