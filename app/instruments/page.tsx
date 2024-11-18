@@ -216,7 +216,7 @@ export default function Page() {
             <input
               type="search"
               id="default-search"
-              className="block pl-2 w-full p-2 ps-10 border-b-4 text-xl text-white bg-transparent focus:outline-none border-0 underline-offset-4"
+              className="block pl-1 w-full p-2 ps-10 border-b-4 text-xl text-white bg-transparent focus:outline-none border-0 underline-offset-4"
               placeholder="Search Instruments"
               value={queryText}
               onChange={(e) => setQueryText(e.target.value)}
