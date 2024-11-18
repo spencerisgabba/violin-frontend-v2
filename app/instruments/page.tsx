@@ -130,7 +130,7 @@ export default function Page() {
   return (
     <div className="flex flex-row products">
       <div
-        className={`bg-amber-100 hidden md:block rounded-lg md:w-1/2 text-amber-50 px-5 ml-5 `}
+        className={`bg-amber-100 min-w-80 hidden md:block rounded-lg  text-amber-50 px-5 ml-5 `}
       >
         <Accordion variant={"light"} defaultExpandedKeys={["1"]}>
           <AccordionItem key="1" aria-label="Instrument" title="Instrument">
