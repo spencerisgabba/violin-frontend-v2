@@ -1,13 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import "./productPage.scss";
 import ZoomImage from "@/app/components/ZoomImage/ZoomImage";
 import useSWR from "swr";
 import { useParams } from "next/navigation";
-import Image from "next/image";
 import { NextSeo } from "next-seo";
+import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/breadcrumbs";
 
 type Violin = {
   image: string;
@@ -24,7 +23,10 @@ type Violin = {
     value: string;
   };
 };
-
+const USDollar = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
 const fetcher = (url: string) =>
   fetch(url).then((res) => {
     if (!res.ok) {
@@ -56,16 +58,17 @@ export default function Page(): JSX.Element {
         title="About Us, or just any title that you wish"
         description="Then with a short description here."
       />
-      <Link href={"/instruments"} className={"inline-block w-10 h-10 m-7"}>
-        <div>
-          <Image
-            width={50}
-            height={50}
-            src={"/icons/returnIcon.svg"}
-            alt={"back arrow"}
-          />
-        </div>
-      </Link>
+      <div className={"p-5"}>
+        <Breadcrumbs className={""}>
+          <BreadcrumbItem href={"/"}>Home</BreadcrumbItem>
+          <BreadcrumbItem href={"/instruments"}>Instruments</BreadcrumbItem>
+          <BreadcrumbItem href={"/instruments"}>Rare and Fine</BreadcrumbItem>
+          <BreadcrumbItem href={`/instruments/${violin.makerLast}`}>
+            {violin.makerLast}
+          </BreadcrumbItem>
+          <BreadcrumbItem>{violin.makeYear}</BreadcrumbItem>
+        </Breadcrumbs>
+      </div>
       <div className="md:p-10 p-0 sm:grid sm:grid-cols-2 place-content-stretch h-auto flex flex-col">
         <div className="flex md:justify-end justify-center zoom-container relative">
           <ZoomImage imageUrls={violin.images} alt={violin.title} />
@@ -78,7 +81,11 @@ export default function Page(): JSX.Element {
             <h1 className="text-5xl font-bold">{violin.makerLast}</h1>
           </div>
 
-          {violin.price ? <p className="text-2xl">${violin.price}</p> : <></>}
+          {violin.price ? (
+            <p className="text-2xl">{USDollar.format(violin.price)}</p>
+          ) : (
+            <></>
+          )}
           <p className={"bg-amber-200 category"}>
             {violin.category.charAt(0).toUpperCase() + violin.category.slice(1)}
           </p>

@@ -124,12 +124,24 @@ const NavBar = () => {
                 exit="exit"
                 transition={{ duration: 0.3 }}
               >
-                <motion.div className="block   w-fit " variants={navItem}>
-                  <Link href="/instruments" className={"navSubLink "}>
+                <motion.div
+                  className="block   w-fit "
+                  onClick={() => setDropdownOpen(false)}
+                  variants={navItem}
+                >
+                  <Link
+                    href="/instruments"
+                    className={"navSubLink "}
+                    onClick={() => setDropdownOpen(false)}
+                  >
                     Rare & Fine
                   </Link>
                 </motion.div>
-                <motion.div className="block   w-fit" variants={navItem}>
+                <motion.div
+                  className="block   w-fit"
+                  onClick={() => setDropdownOpen(false)}
+                  variants={navItem}
+                >
                   <Link href="/instruments/bows" className={"navSubLink"}>
                     Bows
                   </Link>

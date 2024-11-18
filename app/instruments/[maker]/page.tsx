@@ -15,7 +15,9 @@ type Violin = {
   price: number;
   category: string;
   description: string;
-  createdAt: string;
+  createdAt: {
+    value: string;
+  };
   maker: string;
   makeYear: string;
   makerFirst: string;

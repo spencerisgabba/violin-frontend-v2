@@ -31,8 +31,8 @@ function Filter({ categories, onFilterChange }: FilterProps) {
   };
 
   return (
-    <ul className="items-center ml-2 w-32 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-      <li className="w-32  border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
+    <ul className="md:flex-col items-baseline ml-2 w-32  text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+      <li className=" border-b border-gray-200 sm:border-b-0 dark:border-gray-600">
         <div className="flex items-center ps-3">
           <input
             id="all-categories"
@@ -45,7 +45,7 @@ function Filter({ categories, onFilterChange }: FilterProps) {
           />
           <label
             htmlFor="all-categories"
-            className="w-32 py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+            className=" py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
           >
             All
           </label>
@@ -54,7 +54,7 @@ function Filter({ categories, onFilterChange }: FilterProps) {
       {categories.map((category) => (
         <li
           key={category}
-          className="w-32 border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600"
+          className=" border-box border-gray-200 sm:border-b-0  dark:border-gray-600"
         >
           <div className="flex items-center ps-3">
             <input
@@ -126,8 +126,8 @@ export default function Page() {
 
   return (
     <div>
-      <div className={"flex"}>
-        <div className="relative ml-2 drop-shadow w-48">
+      <div className={"sm:flex block md:w-full"}>
+        <div className="relative ml-2 drop-shadow w-48 ">
           <div className="absolute inset-y-0 start-0 h-9 flex items-center ps-3 pointer-events-none align-middle">
             <svg
               className="w-4 h-4 text-gray-200"

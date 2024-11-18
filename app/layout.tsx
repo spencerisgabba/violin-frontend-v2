@@ -1,12 +1,9 @@
-
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./global.scss";
 import NavBar from "@/app/components/NavBar/NavBar";
-import { GoogleAnalytics } from '@next/third-parties/google'
-
-
-
+import { GoogleAnalytics } from "@next/third-parties/google";
+import Footer from "@/app/components/footer/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,7 +18,8 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   title: "Violin Guild of America",
-  description: "The VGA Academy for Refurbishment was founded in 2011 by master violin maker, William Bartruff of Minneapolis Minnesota. William's goal in founding the guild was to pass on his knowledge to a new generation of luthiers and preserve the tradition of violin makers. The results have been notable.",
+  description:
+    "The VGA Academy for Refurbishment was founded in 2011 by master violin maker, William Bartruff of Minneapolis Minnesota. William's goal in founding the guild was to pass on his knowledge to a new generation of luthiers and preserve the tradition of violin makers. The results have been notable.",
 };
 
 export default function RootLayout({
@@ -34,11 +32,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <NavBar/>
+        <NavBar />
 
-      {children}
-      <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_ANALYTICS_ID}`} />
+        {children}
+        <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_ANALYTICS_ID}`} />
       </body>
+      <Footer />
     </html>
   );
 }

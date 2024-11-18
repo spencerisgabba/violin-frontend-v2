@@ -5,13 +5,12 @@
   padding-top: 15vw;
   margin-top: -10vw;
 
-  background-image: url("placeholder.jpg");
   background-size: cover;
 
 
   .glass {
     min-height: 20em;
-    background: rgba(255, 255, 255, 0.2);
+    background: #faffff;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -39,5 +38,95 @@
     @include md {
       justify-content: inherit;
     }
+  }
+}
+
+input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  margin-bottom: .8em;
+  cursor: pointer;
+}
+
+label {
+  margin-left: .5em;
+  margin-bottom: 0.8em;
+
+  color: #1f2d3a;
+  font-size: 1.2em;
+  line-height: 1em;
+
+}
+
+.sliding-pane {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  height: 400px; /* Adjust height as needed */
+  background-color: #f9f9f9; /* Background color */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000; /* Ensure it appears above other content */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  transform: translateY(100%); /* Initially hidden */
+  transition: transform 0.3s ease; /* Smooth transition */
+}
+
+.sliding-pane.open {
+  transform: translateY(0); /* Show pane */
+}
+
+.open-button, .close-button {
+  font-size: 1em;
+  padding: 3px; /* Padding for buttons */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+}
+
+
+.mobile-filters {
+  display: none; /* Hide by default */
+}
+
+.filters-button {
+  margin: 10px; /* Margin for the button */
+  padding: 10px; /* Padding for the button */
+  color: white; /* Button text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+}
+
+
+.mobile-filters-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f9f9f9; /* Background color */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+.close-button {
+  margin: 10px; /* Margin for close button */
+  padding: 10px; /* Padding for close button */
+  background-color: #e63946; /* Close button color */
+  color: white; /* Close button text color */
+  border: none; /* Remove border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+}
+
+.close-button:hover {
+  background-color: #d62839; /* Darker shade on hover */
+}
+
+/* Media query to show mobile filters button on small screens */
+@media (max-width: 768px) {
+  .mobile-filters {
+    display: block; /* Show on mobile */
   }
 }
