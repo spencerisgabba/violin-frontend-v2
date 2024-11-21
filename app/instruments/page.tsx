@@ -169,26 +169,26 @@ export default function Page() {
               className="max-w-md"
             />
           </AccordionItem>
-          <AccordionItem key="3" aria-label="Price" title="Price">
-            <h2 className={"text-black"}>
-              Price Range: {USDollar.format(priceRange[0])} -{" "}
-              {USDollar.format(priceRange[1])}
-            </h2>
-            <Slider
-              label="Price Range"
-              step={100}
-              minValue={MIN_PRICE}
-              maxValue={MAX_PRICE}
-              defaultValue={[MIN_PRICE, MAX_PRICE]}
-              value={priceRange}
-              onChange={(value: number | number[]) => {
-                if (Array.isArray(value)) {
-                  setPriceRange(value);
-                }
-              }}
-              className="max-w-md"
-            />
-          </AccordionItem>
+          {/*<AccordionItem key="3" aria-label="Price" title="Price">*/}
+          {/*  <h2 className={"text-black"}>*/}
+          {/*    Price Range: {USDollar.format(priceRange[0])} -{" "}*/}
+          {/*    {USDollar.format(priceRange[1])}*/}
+          {/*  </h2>*/}
+          {/*  <Slider*/}
+          {/*    label="Price Range"*/}
+          {/*    step={100}*/}
+          {/*    minValue={MIN_PRICE}*/}
+          {/*    maxValue={MAX_PRICE}*/}
+          {/*    defaultValue={[MIN_PRICE, MAX_PRICE]}*/}
+          {/*    value={priceRange}*/}
+          {/*    onChange={(value: number | number[]) => {*/}
+          {/*      if (Array.isArray(value)) {*/}
+          {/*        setPriceRange(value);*/}
+          {/*      }*/}
+          {/*    }}*/}
+          {/*    className="max-w-md"*/}
+          {/*  />*/}
+          {/*</AccordionItem>*/}
         </Accordion>
       </div>
 
@@ -308,9 +308,7 @@ export default function Page() {
                                 • {violin.makeYear}
                               </p>
                             </div>
-                            <p className="text-lg text-gray-400">
-                              {USDollar.format(violin.price)}
-                            </p>
+
                           </motion.div>
                         </Link>
                       );
@@ -383,23 +381,23 @@ export default function Page() {
                   className="max-w-md"
                 />
               </div>
-              <div>
-                <h3>Price Range</h3>
-                <Slider
-                  label="Price Range"
-                  step={100}
-                  minValue={MIN_PRICE}
-                  maxValue={MAX_PRICE}
-                  defaultValue={[MIN_PRICE, MAX_PRICE]}
-                  value={priceRange}
-                  onChange={(value: number | number[]) => {
-                    if (Array.isArray(value)) {
-                      setPriceRange(value);
-                    }
-                  }}
-                  className="max-w-md"
-                />
-              </div>
+              {/*<div>*/}
+              {/*  <h3>Price Range</h3>*/}
+              {/*  <Slider*/}
+              {/*    label="Price Range"*/}
+              {/*    step={100}*/}
+              {/*    minValue={MIN_PRICE}*/}
+              {/*    maxValue={MAX_PRICE}*/}
+              {/*    defaultValue={[MIN_PRICE, MAX_PRICE]}*/}
+              {/*    value={priceRange}*/}
+              {/*    onChange={(value: number | number[]) => {*/}
+              {/*      if (Array.isArray(value)) {*/}
+              {/*        setPriceRange(value);*/}
+              {/*      }*/}
+              {/*    }}*/}
+              {/*    className="max-w-md"*/}
+              {/*  />*/}
+              {/*</div>*/}
             </div>
           </motion.div>
         )}

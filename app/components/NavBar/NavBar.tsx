@@ -134,7 +134,7 @@ const NavBar = () => {
                     className={"navSubLink "}
                     onClick={() => setDropdownOpen(false)}
                   >
-                    Rare & Fine
+                    Rare
                   </Link>
                 </motion.div>
                 <motion.div

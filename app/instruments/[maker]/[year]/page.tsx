@@ -80,12 +80,6 @@ export default function Page(): JSX.Element {
             </h1>
             <h1 className="text-5xl font-bold">{violin.makerLast}</h1>
           </div>
-
-          {violin.price ? (
-            <p className="text-2xl">{USDollar.format(violin.price)}</p>
-          ) : (
-            <></>
-          )}
           <p className={"bg-amber-200 category"}>
             {violin.category.charAt(0).toUpperCase() + violin.category.slice(1)}
           </p>

@@ -38,7 +38,7 @@ export default function Page() {
   const { maker } = params;
   const [filteredViolins, setFilteredViolins] = useState<Violin[]>([]);
   const { data, error } = useSWR<Violin[]>(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/${maker}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${maker}`,
     fetcher,
   );
   const [sortOption, setSortOption] = useState<
@@ -234,7 +234,6 @@ export default function Page() {
                         <h4 className={"text-gray-500 m-0 p-0"}>
                           {violin.makeYear}
                         </h4>
-                        <p className="text-lg text-gray-400">${violin.price}</p>
                       </motion.div>
                     </Link>
                   );
