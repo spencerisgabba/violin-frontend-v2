@@ -4,11 +4,12 @@
 @tailwind utilities;
 
 :root {
-  --background: #2e4057;
+  --background: rgba(33, 47, 62, 0.82);
   --foreground: #171717;
-  --yellow: #f2cf7d;
+  --yellow: #FADA5E;
   --light-blue: #c2ebff;
-  --white: #ede9e9;
+  --white: #572e2e;
+  --dablue: #2e4057;
 }
 
 body {

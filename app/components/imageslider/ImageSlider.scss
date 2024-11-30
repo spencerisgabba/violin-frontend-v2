@@ -1,0 +1,13 @@
+.ImageSlider{
+  width: 80svw;
+  height: 50svh;
+
+  filter: grayscale(100%);
+img{
+  filter: drop-shadow(-3px 4px 6px #000000);
+}
+
+}
+.wrap{
+  width: 300vw;
+}

@@ -1,17 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import "./productPage.scss";
+import { FC, useEffect, useState } from "react";
 import ZoomImage from "@/app/components/ZoomImage/ZoomImage";
 import useSWR from "swr";
 import { useParams } from "next/navigation";
-import { NextSeo } from "next-seo";
 import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/breadcrumbs";
-
-type Violin = {
+import "./instrumentPage.scss";
+type Instrument = {
   image: string;
   title: string;
   price: number;
+  location: string;
   maker: string;
   makeYear: string;
   makerFirst: string;
@@ -23,10 +22,10 @@ type Violin = {
     value: string;
   };
 };
-const USDollar = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-});
+type InstrumentPageProps = {
+  category: string;
+};
+
 const fetcher = (url: string) =>
   fetch(url).then((res) => {
     if (!res.ok) {
@@ -34,58 +33,59 @@ const fetcher = (url: string) =>
     }
     return res.json();
   });
-export default function Page(): JSX.Element {
+
+const InstrumentPage: FC<InstrumentPageProps> = ({ category }) => {
   const params = useParams<{ maker: string; year: string }>();
-  const [violin, setViolin] = useState<Violin | null>(null);
+  const [instrument, setInstrument] = useState<Instrument | null>(null);
+  console.log(category);
   const { maker, year } = params;
-  const { data, error } = useSWR<Violin[]>(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/product/${maker}/${year}`,
+  const { data, error } = useSWR<Instrument[]>(
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/${category}/${maker}/${year}`,
     fetcher,
   );
 
   useEffect(() => {
     if (data) {
-      setViolin(data[0]);
+      setInstrument(data[0]);
     }
   }, [data]);
 
-  if (error) return <div>Error loading violin details.</div>;
-  if (!violin) return <div>Loading...</div>;
+  if (error) return <div>Error loading instrument details.</div>;
+  if (!instrument) return <div>Loading...</div>;
 
   return (
     <div className={"bg-amber-50"}>
-      <NextSeo
-        title="About Us, or just any title that you wish"
-        description="Then with a short description here."
-      />
       <div className={"p-5"}>
         <Breadcrumbs className={""}>
           <BreadcrumbItem href={"/"}>Home</BreadcrumbItem>
           <BreadcrumbItem href={"/instruments"}>Instruments</BreadcrumbItem>
-          <BreadcrumbItem href={"/instruments"}>Rare and Fine</BreadcrumbItem>
-          <BreadcrumbItem href={`/instruments/${violin.makerLast}`}>
-            {violin.makerLast}
+          <BreadcrumbItem href={`/instruments/rare/${category}s`}>
+            {category.charAt(0).toUpperCase() + category.slice(1)}s
           </BreadcrumbItem>
-          <BreadcrumbItem>{violin.makeYear}</BreadcrumbItem>
+          <BreadcrumbItem>
+            {instrument.makerLast} {instrument.makeYear}
+          </BreadcrumbItem>
         </Breadcrumbs>
       </div>
       <div className="md:p-10 p-0 sm:grid sm:grid-cols-2 place-content-stretch h-auto flex flex-col">
         <div className="flex md:justify-end justify-center zoom-container relative">
-          <ZoomImage imageUrls={violin.images} alt={violin.title} />
+          <ZoomImage imageUrls={instrument.images} alt={instrument.title} />
         </div>
         <div className="md:ml-10 ml-2 ">
           <div className={"flex flex-col"}>
             <h1 className="text-3xl font-bold text-amber-300 opacity-40 ">
-              {violin.makerFirst}
+              {instrument.makerFirst}
             </h1>
-            <h1 className="text-5xl font-bold">{violin.makerLast}</h1>
+            <h1 className="text-5xl font-bold">{instrument.makerLast}</h1>
           </div>
-          <p className={"bg-amber-200 category"}>
-            {violin.category.charAt(0).toUpperCase() + violin.category.slice(1)}
-          </p>
-          <p className="pt-5">{violin.description}</p>
+          {instrument.description &&
+          instrument.description !== "undefined" &&
+          instrument.description.toLowerCase() !== "null" ? (
+            <p className="pt-5">{instrument.description}</p>
+          ) : null}
         </div>
       </div>
     </div>
   );
-}
+};
+export default InstrumentPage;

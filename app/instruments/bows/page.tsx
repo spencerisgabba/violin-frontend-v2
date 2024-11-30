@@ -1,213 +1,261 @@
 "use client";
-import useSWR from "swr";
-import { useEffect, useState } from "react";
-import { useFuzzySearchList } from "@nozbe/microfuzz/react";
-
-interface Bow {
-  id: string;
-  name: string;
-  Type: string;
-  Price: number;
-}
-
-interface FilterProps {
-  categories: string[];
-  onFilterChange: (category: string) => void;
-}
-
-function Filter({ categories, onFilterChange }: FilterProps) {
-  const [selectedCategory, setSelectedCategory] = useState("");
-
-  const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSelectedCategory(e.target.value);
-    onFilterChange(e.target.value);
-  };
-
-  // Map category codes to display names
-  const categoryNames: { [key: string]: string } = {
-    VA: "Viola",
-    VC: "Cello",
-    VN: "Violin",
-  };
-
-  return (
-    <ul className="md:flex-col items-baseline ml-2 w-32  text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-      <li className=" border-b border-gray-200 sm:border-b-0 dark:border-gray-600">
-        <div className="flex items-center ps-3">
-          <input
-            id="all-categories"
-            type="radio"
-            name="category"
-            value=""
-            checked={selectedCategory === ""}
-            onChange={handleCategoryChange}
-            className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-          />
-          <label
-            htmlFor="all-categories"
-            className=" py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-          >
-            All
-          </label>
-        </div>
-      </li>
-      {categories.map((category) => (
-        <li
-          key={category}
-          className=" border-box border-gray-200 sm:border-b-0  dark:border-gray-600"
-        >
-          <div className="flex items-center ps-3">
-            <input
-              id={category}
-              type="radio"
-              name="category"
-              value={category}
-              checked={selectedCategory === category}
-              onChange={handleCategoryChange}
-              className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
-            />
-            <label
-              htmlFor={category}
-              className="w-full py-3 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-            >
-              {categoryNames[category] || category}
-            </label>
-          </div>
-        </li>
-      ))}
-    </ul>
-  );
-}
+import { useEffect, useRef, useState } from "react";
+import { BowResponse } from "@/app/interfaces/interfaces";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableColumn,
+  TableHeader,
+  TableRow,
+} from "@nextui-org/table";
+import { Spinner } from "@nextui-org/spinner";
+import { Input } from "@nextui-org/input";
+import { SearchIcon } from "@nextui-org/shared-icons";
+import { useDebouncedCallback } from "use-debounce";
+import { Button } from "@nextui-org/button";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from "@nextui-org/dropdown";
+import Image from "next/image";
+import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/breadcrumbs";
+import "./bows.scss";
+import { useBows } from "@/app/components/useData/useData";
 
 const USDollar = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
-const fetcher = (url: string) =>
-  fetch(url).then((res) => {
-    if (!res.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return res.json();
-  });
+
+const categories = [
+  { value: "", label: "All" }, // Option to show all types
+  { value: "VN", label: "Violin" },
+  { value: "VC", label: "Cello" },
+  { value: "VA", label: "Viola" },
+];
 
 export default function Page() {
-  const [queryText, setQueryText] = useState("");
-  const [bows, setBows] = useState<Bow[]>([]);
-  const [filteredBows, setFilteredBows] = useState<Bow[]>([]);
-  const { data, error } = useSWR<Bow[]>(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/bows`,
-    fetcher,
-  );
-  const filteredList = useFuzzySearchList({
-    list: filteredBows,
-    queryText,
-    getText: (item) => [item.name, item.Type],
-    mapResultItem: ({ item }) => item,
+  const [pagestate, setPageState] = useState({
+    page: 1,
+    perPage: 10,
   });
 
-  const categories = ["VA", "VC", "VN"];
-  const handleFilterChange = (category: string) => {
-    if (category === "") {
-      setFilteredBows(bows);
-    } else {
-      const filtered = bows.filter((bow) => bow.Type === category);
-      setFilteredBows(filtered);
-    }
+  const seeMoreRef = useRef<HTMLInputElement>(null);
+  const [searchTerm] = useState(" ");
+  const [searchEntry, setSearchEntry] = useState(searchTerm);
+  const [filter, setFilter] = useState({
+    type: "",
+  });
+
+  const debounced = useDebouncedCallback(
+    // function
+    (searchTerm) => {
+      setSearchEntry(searchTerm);
+    },
+    // delay in ms
+    750,
+  );
+  const { instruments, pageInfo, isLoading } = useBows(
+    pagestate.page,
+    searchEntry,
+    pagestate.perPage,
+    filter.type,
+  );
+
+  const handleFilterChange = (selectedType: string) => {
+    setFilter((prev) => ({ ...prev, type: selectedType }));
   };
-
+  const [hasMore, setHasMore] = useState(pageInfo?.hasNextPage || false);
+  const incrementPerPage = () => {
+    setPageState((prev) => ({ ...prev, perPage: prev.perPage + 20 }));
+  };
   useEffect(() => {
-    if (data) {
-      setBows(data);
-      setFilteredBows(data);
+    if (instruments) {
+      setHasMore(pageInfo?.hasNextPage || false);
     }
-  }, [data]);
-  if (error) return <div>Error loading Bow details.</div>;
-
+  }, [instruments, pageInfo?.hasNextPage]);
+  // const scrollToSection = (ref:<HTMLDivElement>) => {
+  //   if (ref.current) {
+  //     ref.current.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // };
   return (
     <div>
-      <div className={"sm:flex block md:w-full"}>
-        <div className="relative ml-2 drop-shadow w-48 ">
-          <div className="absolute inset-y-0 start-0 h-9 flex items-center ps-3 pointer-events-none align-middle">
-            <svg
-              className="w-4 h-4 text-gray-200"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              fillOpacity={0}
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="white"
-                strokeLinecap="round"
-                fill={"white"}
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-              />
-            </svg>
+      <div className={"flex flex-col text-gray-200"}>
+        <Breadcrumbs className={"ml-6"}>
+          <BreadcrumbItem href={"/"}>Home</BreadcrumbItem>
+          <BreadcrumbItem href={"/instruments"}>Instruments</BreadcrumbItem>
+          <BreadcrumbItem
+            className={"text-gray-100"}
+            href={`/instruments/bows`}
+          >
+            <p className={"text-gray-100"}>Bows</p>
+          </BreadcrumbItem>
+        </Breadcrumbs>
+        <div className={"flex flex-col md:flex-row"}>
+          <div
+            className={"flex flex-col  pl-2 mt-2 md:mt-10 md:w-1/2 md:px-10"}
+          >
+            <div>
+              <h1 className={"title md:text-center text-gray-100"}>
+                Rare Bows
+              </h1>
+            </div>
+            <div>
+              <p className={"subHeading"}>
+                We offer a large selection of rare bows, and also represent
+                numerous contemporary bow makers. Please contact us for pricing
+                or to make an appointment
+              </p>
+            </div>
           </div>
-          <input
-            type="search"
-            id="default-search"
-            className="block w-full p-2 ps-10 text-sm text-gray-50  rounded-lg bg-gray-500  dark:placeholder-gray-400  "
-            placeholder="Search Bows"
-            value={queryText}
-            onChange={(e) => setQueryText(e.target.value)}
-          />
+          <div className={"relative w-full h-80 mt-2 md:w-1/2"}>
+            <Image
+              fill
+              objectFit={"cover"}
+              src={"/IsLargeScreenImages/7.jpg"}
+              alt={"Rare Violin"}
+            />
+          </div>
         </div>
-        <Filter categories={categories} onFilterChange={handleFilterChange} />
       </div>
       <div className="shadow-sm overflow-hidden my-8">
-        <table className="table-auto border-collapse w-full text-sm">
-          <thead>
-            <tr>
-              <th
-                className={
-                  "border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
-                }
-              >
-                <div className={"flex"}>
-                  <h1
-                    className={
-                      "  font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left mt-2"
-                    }
-                  >
-                    Bows
-                  </h1>
-                </div>
-              </th>
-              <th
-                className={
-                  "border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left"
-                }
-              >
-                Price
-              </th>
-            </tr>
-          </thead>
-          <tbody className={"bg-white dark:bg-slate-800"}>
-            {filteredList.map((bow) => (
-              <tr key={bow.id}>
-                <td
-                  className={
-                    "border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400"
-                  }
+        <Table
+          aria-label="Bow List Table"
+          style={{ color: "white" }}
+          bottomContent={
+            hasMore && !isLoading ? (
+              <div className="flex w-full justify-center">
+                <Button
+                  isDisabled={isLoading}
+                  variant="flat"
+                  onPress={incrementPerPage}
                 >
-                  {bow.name}
-                </td>
+                  {isLoading && <Spinner color="white" size="sm" />}
+                  Load More
+                </Button>
+              </div>
+            ) : null
+          }
+        >
+          <TableHeader className={"w-full"}>
+            <TableColumn className={"flex align-middle items-center"}>
+              <span className={"pr-2 pl-0 md:pl-3"}>NAME</span>
+              <Input
+                label=""
+                isClearable
+                defaultValue={searchTerm}
+                size="sm"
+                onChange={(e) => debounced(e.target.value.toLowerCase())}
+                radius="lg"
+                className={"w-fit"}
+                classNames={{
+                  label: "text-black/50 dark:text-white/90",
+                  input: [
+                    "bg-transparent",
+                    "ark:text-white/90",
+                    "placeholder:text-default-700/50 dark:placeholder:text-white/60 ",
+                  ],
+                  innerWrapper: "bg-transparent",
+                  inputWrapper: [
+                    "shadow-xl",
+                    "bg-default-200/50",
+                    "dark:bg-default/60",
+                    "backdrop-blur-xl",
+                    "backdrop-saturate-200",
+                    "hover:bg-default-200/70",
+                    "dark:hover:bg-default/70",
+                    "group-data-[focus=true]:bg-default-200/50",
+                    "dark:group-data-[focus=true]:bg-default/60",
 
-                <td
-                  className={
-                    "border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400"
-                  }
+                    "!cursor-text",
+                  ],
+                }}
+                startContent={
+                  <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
+                }
+                placeholder="Search"
+              />
+            </TableColumn>
+            <TableColumn>
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button
+                    variant="bordered"
+                    className="capitalize text-gray-200"
+                  >
+                    {filter.type || "Type"}{" "}
+                    {/* Default text when no category is selected */}
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  aria-label="Category selection"
+                  variant="flat"
+                  disallowEmptySelection
+                  selectionMode="single"
+                  selectedKeys={new Set([filter.type])} // Set the selected key based on the filter
+                  onSelectionChange={(selected) => {
+                    const selectedValue = Array.from(selected).join(""); // Convert Set to string
+                    handleFilterChange(selectedValue);
+                  }}
                 >
-                  {USDollar.format(bow.Price)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  {categories.map((category) => (
+                    <DropdownItem
+                      className="text-gray-300"
+                      key={category.value} // Key needs to match value
+                    >
+                      {category.label}
+                    </DropdownItem>
+                  ))}
+                </DropdownMenu>
+              </Dropdown>
+            </TableColumn>
+            <TableColumn>PRICE</TableColumn>
+          </TableHeader>
+          <TableBody>
+            {isLoading ? (
+              <TableRow>
+                <TableCell colSpan={3}>
+                  <Spinner
+                    label="Loading..."
+                    color="warning"
+                    className="ml-5 mt-10"
+                  />
+                </TableCell>
+                <TableCell className="text-center">
+                  <></>
+                </TableCell>
+                <TableCell className="text-center">
+                  <></>
+                </TableCell>
+              </TableRow>
+            ) : instruments ? (
+              instruments.map((bow: BowResponse) => (
+                <TableRow key={bow.id}>
+                  <TableCell>{bow.name}</TableCell>
+                  <TableCell>{bow.Type}</TableCell>
+                  <TableCell>{USDollar.format(bow.Price)}</TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={3} className="text-center">
+                  Your keywords and filters don&#39;t match any products.
+                </TableCell>
+                <TableCell className="text-center">
+                  <></>
+                </TableCell>
+                <TableCell className="text-center">
+                  <></>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+        <div ref={seeMoreRef}></div>
       </div>
     </div>
   );

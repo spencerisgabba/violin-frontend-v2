@@ -1,4 +1,4 @@
-import "../../../global.scss";
+import "../../../../../global.scss";
 
 type Props = {
   params: Promise<{ maker: string; year: string }>;

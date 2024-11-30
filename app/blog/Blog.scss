@@ -1,9 +1,16 @@
 @use '../global' as *;
 
 @import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
-
+.fullblg{
+  background: rgb(23,23,23);
+  background: -moz-linear-gradient(180deg, rgba(23,23,23,1) 0%, rgba(33,47,62,1) 100%);
+  background: -webkit-linear-gradient(180deg, rgba(23,23,23,1) 0%, rgba(33,47,62,1) 100%);
+  background: linear-gradient(180deg, rgba(23,23,23,1) 0%, rgba(33,47,62,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#171717",endColorstr="#212f3e",GradientType=1);
+}
 .blogImg {
   overflow: hidden;
+  z-index: -1;
 
   //@include xs {
   //  //height: 100%;
@@ -27,10 +34,8 @@
   position: relative;
   width: fit-content;
   z-index: 2; // Higher z-index than shapes
-  margin-bottom: 1em;
   font-family: "Inknut Antiqua", serif;
   font-weight: 700;
-  color: #131313;
   text-decoration: none;
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
@@ -69,7 +74,7 @@
   @include xl {
 
   }
-  z-index: 100;
+  z-index: 5;
 
   &:hover,
   &:focus-visible {
@@ -86,7 +91,7 @@
 }
 
 .blogs {
-  width: 90vw;
+  width: 100%;
   margin-left: 5em;
   margin-right: 5em;
   justify-items: center;
@@ -95,7 +100,6 @@
   @include xs {
     padding: 0;
     display: flex;
-    margin-top: 22rem;
     flex-direction: column;
     justify-content: center;
     align-content: center;
@@ -104,44 +108,18 @@
   @include xl {
     padding: 6em;
     width: 100vw;
-    margin-top: 5rem;
     display: grid;
     gap: 10em;
 
   }
-  @include md {
-    margin-top: 23rem;
 
-
-  }
 
 }
 
 .fbi {
-  position: relative;
-  z-index: 100;
-  top: 30vh;
-  right: 25vw;
-  @include xs {
-    width: 70vw;
-    margin-top: 5em;
-    margin-left: 8em;
-    top: 35vh;
 
-  }
-  @include sm {
-    margin-top: 4em;
-  }
-  @include md {
-    margin-top: 4em;
-    top: 30vh;
-    width: 20em;
-  }
-  @include xl {
-    margin-left: 5em;
-    top: 40vh;
+    width: clamp(10rem, 75vw + 1rem, 45rem);
 
-    width: 35vw;
-  }
+
 
 }

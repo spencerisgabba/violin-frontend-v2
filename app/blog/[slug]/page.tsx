@@ -8,19 +8,7 @@ import { useParams } from "next/navigation";
 import Image from "next/image";
 import DOMPurify from "dompurify";
 import { formatDistanceToNow } from "date-fns";
-
-type BlogPost = {
-  id: string;
-  slug: string;
-  title: string;
-  subheading: string;
-  image_url: string;
-  author: string;
-  content: string; // Assuming you have content or body field for the post
-  createdAt: {
-    value: string;
-  };
-};
+import {BlogPost} from "@/app/interfaces/interfaces";
 
 const fetcher = (url: string) =>
   fetch(url).then((res) => {
@@ -36,7 +24,7 @@ const BlogPostPage = () => {
 
   const { data, error } = useSWR<BlogPost[]>(
     params!.slug
-      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/blog/slug/${params!.slug}`
+      ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/slug/${params!.slug}`
       : null,
     fetcher,
   );
@@ -64,7 +52,7 @@ const BlogPostPage = () => {
       <div className={"flex flex-col align-middle justify-center blogCont "}>
         <div className="lg:p-10 flex flex-col align-middle items-center p-4 lg:w-1/2 ">
           <div className={"info items-baseline"}>
-            <h1 className="lg:text-5xl text-3xl  max-w-68 font-extrabold">
+            <h1 className="lg:text-5xl text-3xl  max-w-1/2 font-extrabold">
               {blogPost.title}
             </h1>
             <h2 className="text-xl lg:text-2xl">{blogPost.subheading}</h2>

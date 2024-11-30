@@ -28,16 +28,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={"dark"}>
+      <body className={`${geistSans.variable} ${geistMono.variable} `}>
         <NavBar />
-
         {children}
         <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_ANALYTICS_ID}`} />
+        <Footer />
       </body>
-      <Footer />
     </html>
   );
 }

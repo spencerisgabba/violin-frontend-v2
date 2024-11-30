@@ -1,12 +1,36 @@
-@use '../global' as *;
+@use '../../../global' as *;
+.product{
+  width: 11.2em;
+
+  @include md{
+    width: auto;
+  }
+}
+.title{
+  font-family: "Inknut Antiqua", serif;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 4rem;
+}
+
+.subHeading{
+  margin-top: 1rem;
+  line-height: 1.2rem;
+  font-weight: 400;
+}
 
 .products {
-  background-color: #2e4057;
-  padding-top: 15vw;
-  margin-top: -10vw;
 
-  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
+  @include md{
+
+    min-width: 80%;
+    background-size: cover;
+  }
 
   .glass {
     min-height: 20em;
@@ -27,14 +51,14 @@
     border-color: #2e4057;
   }
 
-  .product {
-
+  .p-contain{
+    width: clamp(30vw,80vw,80vw);
 
   }
 
   .productcontainers {
     justify-content: center;
-
+    width: 95svw;
     @include md {
       justify-content: inherit;
     }

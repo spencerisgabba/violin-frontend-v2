@@ -1,0 +1,68 @@
+@use '../../global' as *;
+
+.product {
+  cursor: pointer;
+  transition: transform 0.2s;
+  max-width: 15rem;
+  &:hover {
+    transform: scale(1.05);
+  }
+
+
+}
+
+
+.image-container {
+
+  aspect-ratio: 9 / 16; // Set the aspect ratio to 9:16
+  width: 100%; // Make the container take the full width of its parent
+  height: auto; // Allow height to adjust based on width
+  position: relative; 
+}
+
+
+.price {
+  color: #fff; // Adjust color as needed
+  font-weight: bold;
+  margin-top: 0.5em;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.max-w-68 {
+  max-width: 17rem; // Adjust based on design
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+.md\\:p-10 {
+  padding: 2.5rem;
+}
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.h-60 {
+  height: 15rem;
+}
+
+.w-40 {
+  width: 10rem;
+}

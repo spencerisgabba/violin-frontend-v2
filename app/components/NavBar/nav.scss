@@ -1,3 +1,5 @@
+@use '../../global' as *;
+
 @keyframes growFromTop {
   from {
     background-size: 100% 0;
@@ -9,13 +11,25 @@
 
 
 .navLink {
+  overflow: hidden;
+
+  margin-left: 1rem;
   background: linear-gradient(#2e4057 0 0) bottom left/
     var(--underline-width, 0%) 0.2em no-repeat;
-
-  display: inline-block;
+  font-family: "Inknut Antiqua", serif;
+line-height: 1.3em;
+  display: block;
   text-decoration: none;
-
+  font-weight: 300;
+  font-size: 2.8rem;
   transition: background-size 0.5s;
+  @include md{
+    font-size: 1.7rem;
+    margin-left: 0;
+  }
+  @include lg{
+    font-size: 1.8rem;
+  }
 }
 
 a:hover {
@@ -23,7 +37,6 @@ a:hover {
 }
 
 .blogs {
-  margin-top: 25em;
   padding-top: 5em;
 }
 
@@ -49,20 +62,75 @@ a:hover {
 
 .navSubLink {
   @extend .navLink;
-  font-size: medium;
-  font-family: sans-serif;
-  font-weight: 500;
+  font-size: 1.8em;
+  font-weight: 300;
   width: 100%;
   background: linear-gradient(#eada79 0 0) bottom left/
     var(--underline-width, 0%) 0.2em no-repeat;
+  @include md{
+    font-size: medium;
 
+  }
 }
 
 .subLinkContainer {
-
-  background: linear-gradient(to bottom, rgba(46, 64, 87, 0.76), rgba(35, 49, 67, 0.71));
+  background-color: linear-gradient(to bottom, rgba(46, 64, 87, 0.76), rgba(35, 49, 67, 0.71));
   backgroundSize: 100% 0;
   backgroundRepeat: no-repeat;
   width: 7rem;
+
+
+  -webkit-transition: background 1s ease-out;
+  -moz-transition: background 1s ease-out;
+  -o-transition: background 1s ease-out;
+  transition: background 1s ease-out;
+  @include md{
+    background-color: rgba(46, 64, 87, 0.76);
+    transition: background-color .5s all;
+  }
 }
 
+
+.nav-container {
+
+  z-index: 1000;
+  overflow: hidden; /* Ensures the content is clipped during the transition */
+  transition: max-height 0.5s ease; /* Smooth animation */
+}
+
+.nav-container.open {
+  max-height: 100vh; /* Maximum height when open (adjust as needed) */
+}
+
+.nav-container.closed {
+  max-height: 0; /* Fully collapsed when closed */
+}
+.open {
+  margin: 0;
+  position: fixed;
+  background-color: #1f2d3a;
+  height:100%;
+  width:100%;
+  overflow: hidden;
+
+  @media (min-width: 768px) {
+    position: relative; /* No full-screen behavior on md+ */
+    width: auto;
+    height: auto;
+    background-color: transparent; /* Maintain transparency for larger screens */
+  }
+}
+
+.closed {
+  overflow: hidden;
+  height:100%;
+  width:100%;
+
+  @media (min-width: 768px) {
+    position: relative; /* Prevent hiding for md+ */
+    width: auto;
+    height: auto;
+    overflow: visible; /* Ensure content is visible */
+    opacity: 1;
+  }
+}

@@ -9,24 +9,35 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@next/react-dev-overlay": "^14.1.4",
     "@next/third-parties": "^15.0.1",
     "@nextui-org/accordion": "^2.0.40",
     "@nextui-org/autocomplete": "^2.1.7",
     "@nextui-org/breadcrumbs": "^2.0.13",
+    "@nextui-org/divider": "^2.0.32",
+    "@nextui-org/dropdown": "^2.1.31",
+    "@nextui-org/input": "^2.2.5",
+    "@nextui-org/modal": "^2.0.41",
     "@nextui-org/pagination": "^2.0.36",
+    "@nextui-org/skeleton": "^2.0.32",
     "@nextui-org/slider": "^2.2.17",
+    "@nextui-org/spinner": "^2.0.34",
     "@nextui-org/system": "^2.2.6",
+    "@nextui-org/table": "^2.0.40",
     "@nextui-org/theme": "^2.2.11",
     "@nozbe/microfuzz": "^1.0.0",
+    "axios": "^1.7.8",
     "date-fns": "^4.1.0",
     "dompurify": "^3.1.7",
     "framer-motion": "^11.11.10",
     "gsap": "^3.12.5",
     "hamburger-react": "^2.5.1",
+    "lodash.debounce": "^4.0.8",
     "next": "^15.0.1",
     "next-cloudinary": "^6.16.0",
     "next-seo": "^6.6.0",
     "next-video": "^1.2.1",
+    "qs": "^6.13.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-fuzzy": "^1.3.1",
@@ -35,7 +46,8 @@
     "react-responsive": "^10.0.0",
     "sass": "^1.32.0",
     "sass-loader": "^12.0.0",
-    "swr": "^2.2.5"
+    "swr": "^2.2.5",
+    "use-debounce": "^10.0.4"
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.5",
@@ -46,7 +58,8 @@
     "eslint-config-next": "15.0.1",
     "postcss": "^8",
     "prettier": "3.3.3",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "tailwindcss": "^3.4.15",
+    "tslint": "^5.20.1",
+    "typescript": "^5.7.2"
   }
 }

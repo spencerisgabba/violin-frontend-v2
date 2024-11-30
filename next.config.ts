@@ -1,25 +1,32 @@
 import type { NextConfig } from "next";
-import './envConfig.ts'
+import "./envConfig.ts";
 const nextConfig: NextConfig = {
-    output: 'standalone',
-    env: {
-        NEXT_PUBLIC_API_BASE_URL: process.env.NEXT_PUBLIC_API_BASE_URL || "https://nestbackendviolin-306962033564.us-central1.run.app",
-        NEXT_PUBLIC_ANALYTICS_ID: process.env.NEXT_PUBLIC_ANALYTICS_ID,
+  output: "standalone",
+  env: {
+    NEXT_PUBLIC_API_BASE_URL:
+      process.env.NEXT_PUBLIC_API_BASE_URL ||
+      "https://nestbackendviolin-306962033564.us-central1.run.app",
+    NEXT_PUBLIC_ANALYTICS_ID: process.env.NEXT_PUBLIC_ANALYTICS_ID,
+  },
+  logging: {
+    fetches: {
+      fullUrl: true,
     },
-    images: {
-        remotePatterns: [
-            {
-                protocol: 'https',
-                hostname: 'images.pexels.com',
-                port: '',
-            },
-            {
-                protocol: 'https',
-                hostname: 'res.cloudinary.com',
-                port: '',
-            },
-        ],
-    },
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.pexels.com",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        port: "",
+      },
+    ],
+  },
 };
 
 export default nextConfig;

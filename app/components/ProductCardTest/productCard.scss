@@ -1,0 +1,81 @@
+@use '../../global' as *;
+@import url('https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap');
+
+.product {
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+
+}
+.bg{
+  background: #f8f8ff;
+}
+.br{
+  background: #e3e3ea;
+
+}
+.image-container {
+
+  aspect-ratio: 9 / 16; // Set the aspect ratio to 9:16
+  width: 100%; // Make the container take the full width of its parent
+  height: auto; // Allow height to adjust based on width
+  position: relative; 
+}
+.pill{
+  color: #1f2d3a;
+
+  p{
+    font-weight: 400;
+    text-wrap: nowrap;
+    font-size: clamp(.7rem, 1vw + 1px, 2rem);
+  }
+}
+.prodtitle{
+  font-family: "Inknut Antiqua", serif;
+  font-weight: 200;
+  font-size: clamp(1.4rem, 8svw, 6rem);
+  line-height: clamp(1.5rem, 7svw + 1rem, 6rem);
+  color: #1f2d3a;
+}
+
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.max-w-68 {
+  max-width: 17rem; // Adjust based on design
+}
+
+.p-3 {
+  padding: 0.75rem;
+}
+
+
+.text-white {
+  color: #ffffff;
+}
+
+.text-gray-500 {
+  color: #6b7280;
+}
+
+.rounded-lg {
+  border-radius: 0.5rem;
+}
+
+.h-60 {
+  height: 15rem;
+}
+
+.w-40 {
+  width: 10rem;
+}

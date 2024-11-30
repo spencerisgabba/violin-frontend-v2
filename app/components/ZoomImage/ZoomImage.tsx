@@ -63,7 +63,7 @@ const ZoomImage: React.FC<ZoomImageProps> = ({ imageUrls, alt }) => {
                         draggable={false}
                         priority={true}
                         objectFit={"contain"}
-                        alt={alt}
+                        alt={"Violin Image"}
                         style={{
                             transform: isActiveMode ? (window.innerWidth > 767 ? 'scale(3)' : 'scale(5)') : 'scale(1)',
                             transformOrigin: transformOrigin,
