@@ -43,6 +43,7 @@ const NavBar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
   const [backgroundColor, setBackgroundColor] = useState("transparent");
+
   const imageWH = 80;
   useEffect(() => {
     switch (true) {

@@ -37,7 +37,6 @@ const fetcher = (url: string) =>
 const InstrumentPage: FC<InstrumentPageProps> = ({ category }) => {
   const params = useParams<{ maker: string; year: string }>();
   const [instrument, setInstrument] = useState<Instrument | null>(null);
-  console.log(category);
   const { maker, year } = params;
   const { data, error } = useSWR<Instrument[]>(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/${category}/${maker}/${year}`,

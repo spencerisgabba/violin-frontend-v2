@@ -28,7 +28,7 @@ export default function BlogPage() {
       setPageState({ page: pagination.page, perPage: pagination.page });
     }
   }, [posts, pagination]);
-  const [itemCount] = useState(total);
+  const [itemCount] = useState(total || 0);
 
   if (isError) return <div>Error loading blog details.</div>;
   return (

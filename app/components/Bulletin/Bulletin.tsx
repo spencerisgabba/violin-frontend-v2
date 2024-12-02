@@ -1,14 +1,24 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import { BlogPost } from "@/app/interfaces/interfaces";
+import { useEffect, useState } from "react"; // Add useEffect and useState
 const data = await fetch(
   `${process.env.NEXT_PUBLIC_API_BASE_URL}/blogs/feature/featured`,
 );
 const featured = await data.json();
 const Bulletin: React.FC = () => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
   return (
     <div>
-      <h1 className="bully">Bulletin</h1>
       <div className="bulletin">
         {featured?.data.map((item: BlogPost) => (
           <div

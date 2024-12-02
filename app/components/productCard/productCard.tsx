@@ -1,4 +1,5 @@
-import { FC } from "react";
+"use client";
+import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -6,11 +7,20 @@ import "./productCard.scss";
 import { ProductCardProps } from "@/app/interfaces/interfaces";
 
 const ProductCard: FC<ProductCardProps> = ({ product }) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const imagesArray = product.images.split(",").map((url) => url.trim());
   const productLink =
     product.category.toLowerCase() === "viola"
       ? `/instruments/rare/violas/${product.makerLast}/${product.makeYear}`
       : `/instruments/rare/violins/${product.makerLast}/${product.makeYear}`;
+  if (!isMounted) {
+    return <div>Loading...</div>; // Render a loading state instead of null
+  }
   return (
     <Link
       key={product.id}
@@ -54,7 +64,7 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
                 product.location.slice(1)}
             </p>
           ) : (
-            <></>
+            <div></div>
           )}
           <p className={"text-gray-600 text-sm w-fit category mr-1 "}>
             {product.makeYear}

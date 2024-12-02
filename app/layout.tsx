@@ -28,8 +28,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={"dark"}>
-      <body className={`${geistSans.variable} ${geistMono.variable} `}>
+    <html lang="en" className={"bg-dablue"}>
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <NavBar />
         {children}
         <GoogleAnalytics gaId={`${process.env.NEXT_PUBLIC_ANALYTICS_ID}`} />

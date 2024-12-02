@@ -7,17 +7,23 @@
 
   width: -moz-available;
   width: -webkit-fill-available;
-  border-radius: 5rem;
-  width: 100vw;
   position: relative;
-  top: -11.2rem;
   max-width: 120%;
   overflow: hidden;
+  border-radius: 0;
+  @include md {
+    width: 200vw;
+    top: -11.2rem;
+    border-radius: 5rem;
+
+
+  }
 
   .video {
     width: clamp(100%, 90vw + 1rem, 120%);
-    @include sm {
+    @include md {
       width: 200vw;
+      top: -11.2rem;
 
     }
 
@@ -67,8 +73,12 @@
   text-align: center;
   z-index: 1;
   font-size: clamp(3rem, 8vw + 1rem, 10rem);
-  top: -5em;
+  top: -3.5em;
   position: relative;
+
+  @include md{
+    top: -5em;
+  }
 }
 .maincontent {
 
@@ -110,6 +120,7 @@
     @include lg {
       flex-direction: row;
       flex-wrap: wrap;
+      margin-top: 5rem;
 
     }
   }

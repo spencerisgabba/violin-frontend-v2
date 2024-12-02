@@ -7,10 +7,10 @@ export const metadata: Metadata = {
     "The Products for the VGA Academy for Refurbishment was founded in 2011 by master violin maker, William Bartruff of Minneapolis Minnesota. William's goal in founding the guild was to pass on his knowledge to a new generation of luthiers and preserve the tradition of violin makers. The results have been notable.",
 };
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div className={"dark"}>{children}</div>;
+  return <div>{children}</div>;
 }

@@ -16,11 +16,17 @@ export default function Page() {
   const violaRef = useRef<HTMLDivElement>(null);
   const isMediumScreen = useMediaQuery({ query: "(min-width: 932px)" });
   const [loading, setLoading] = useState(true);
-  // Hook to get scroll progress
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   const { scrollYProgress } = useScroll({
     target: scrollRef,
     offset: ["start start", "end end"], // Adjust offsets for desired effect
   });
+
   useEffect(() => {
     if (typeof topThree !== "undefined" && topThree.length > 0) {
       setLoading(false);
@@ -49,9 +55,11 @@ export default function Page() {
   const violas = topThree.filter(
     (instrument: Instrument) => instrument.category === "viola",
   );
-
+  if (!isMounted) {
+    return <div>Loading...</div>; // Render a loading state instead of null
+  }
   return (
-    <div className="main min-h-screen overflow-hidden">
+    <div className="min-h-screen overflow-hidden pageBack">
       <div className="flex flex-col items-center">
         <div className="wrapper p-6 mt-52">
           <h1 className="rnf text-6xl">Rare & Fine</h1>

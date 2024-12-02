@@ -5,10 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ada1276f-e19e-4432-a50f-b90babb84fe5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/components/Movingtext/movingText.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployment.yaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blog/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/blog/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/Bulletin/Bulletin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/Bulletin/Bulletin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/NavBar/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/NavBar/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/ProductPage/InstrumentPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/ProductPage/InstrumentPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/productCard/productCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/productCard/productCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/home.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/home.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/instruments/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/instruments/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/instruments/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/instruments/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/instruments/rare.scss" beforeDir="false" afterPath="$PROJECT_DIR$/app/instruments/rare.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tailwind.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tailwind.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,8 +32,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="TypeScript JSX File" />
         <option value="SCSS File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -39,27 +53,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.Dockerfile.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/spenn/Documents/NextApp/violin-frontend/violin-frontend-v2/public/icons",
-    "list.type.of.created.stylesheet": "SCSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "npm.lint.executor": "Run",
-    "prettierjs.PrettierConfiguration.Package": "C:\\Users\\spenn\\Documents\\NextApp\\violin-frontend\\violin-frontend-v2\\node_modules\\prettier",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "ts.external.directory.path": "C:\\Users\\spenn\\Documents\\NextApp\\violin-frontend\\violin-frontend-v2\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/spenn/Documents/NextApp/violin-frontend/violin-frontend-v2/public/icons&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;npm.lint.executor&quot;: &quot;Run&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;C:\\Users\\spenn\\Documents\\NextApp\\violin-frontend\\violin-frontend-v2\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\spenn\\Documents\\NextApp\\violin-frontend\\violin-frontend-v2\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -95,7 +109,9 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="docker-deploy" factoryName="dockerfile" temporary="true">
-      <deployment type="dockerfile" />
+      <deployment type="dockerfile">
+        <settings />
+      </deployment>
       <method v="2" />
     </configuration>
     <configuration name="lint" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -139,7 +155,9 @@
       <workItem from="1732296868055" duration="34477000" />
       <workItem from="1732514901680" duration="87457000" />
       <workItem from="1732725385088" duration="79065000" />
-      <workItem from="1732920626736" duration="15534000" />
+      <workItem from="1732920626736" duration="24687000" />
+      <workItem from="1733075058932" duration="58000" />
+      <workItem from="1733158337817" duration="4942000" />
     </task>
     <servers />
   </component>
