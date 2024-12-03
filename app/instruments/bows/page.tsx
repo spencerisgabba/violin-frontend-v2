@@ -116,7 +116,9 @@ export default function Page() {
             <Image
               fill
               objectFit={"cover"}
-              src={"/IsLargeScreenImages/7.jpg"}
+              src={
+                "https://res.cloudinary.com/dztnyrx5z/image/upload/v1733187977/6_sijzft.jpg"
+              }
               alt={"Rare Violin"}
             />
           </div>
