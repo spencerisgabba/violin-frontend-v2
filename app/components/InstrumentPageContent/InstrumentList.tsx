@@ -201,6 +201,7 @@ const InstrumentList = ({ category }: { category: string }) => {
                 </ModalContent>
               </Modal>
             </div>
+
             {isLargeScreen && (
               <div
                 className={
@@ -291,7 +292,13 @@ const InstrumentList = ({ category }: { category: string }) => {
                 />
               ))
             ) : (
-              <Spinner />
+              <div
+                className={
+                  "bg-white w-screen flex items-center justify-center py-10"
+                }
+              >
+                <Spinner className={"bg-white "} />
+              </div>
             )}
           </div>
         </div>

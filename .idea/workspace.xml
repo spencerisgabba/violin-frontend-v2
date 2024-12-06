@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ada1276f-e19e-4432-a50f-b90babb84fe5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/instruments/rare/violas/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/instruments/rare/violas/page.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/instruments/rare/violins/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/instruments/rare/violins/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/components/InstrumentPageContent/InstrumentList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/components/InstrumentPageContent/InstrumentList.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +44,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/spenn/Documents/NextApp/violin-frontend/violin-frontend-v2/public/icons&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/spenn/Documents/SNHU FULL STACK/app_admin&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;SCSS&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -142,7 +141,8 @@
       <workItem from="1732725385088" duration="79065000" />
       <workItem from="1732920626736" duration="24687000" />
       <workItem from="1733075058932" duration="58000" />
-      <workItem from="1733158337817" duration="8455000" />
+      <workItem from="1733158337817" duration="16680000" />
+      <workItem from="1733410631168" duration="2000" />
     </task>
     <servers />
   </component>
